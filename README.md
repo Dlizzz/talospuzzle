@@ -1,7 +1,7 @@
 # talospuzzle
 
 This C++ application solves the Sigil puzzles in Talos Principle game from Croteam: <http://www.croteam.com/talosprinciple/>
-It's the C++port of the Python3 application:
+It's the C++ port of the Python3 application: <https://github.com/Dlizzz/tppy>
 
 Puzzle board is made of Rows x Columns cells.
 Column is the horizontal dimension.
