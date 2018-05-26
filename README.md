@@ -42,7 +42,6 @@ Solutions (if they exist) are output on the console and can be saved as PNG imag
 
 ## Requirements
 
-
 ## Algorithm
 
 The global approach is the following:
@@ -60,6 +59,30 @@ A "go by level" approach means that you combine each valid combinations of one l
 The application uses a brute force approach with paralelization (threading) of a recursive function. There is one thread per tree of combinations, executing a tree crawler recursive function.
 
 Even with the early drop of dead branches, it could take some time to solve large puzzles and find all their possible solutions. As an example, to solve the red puzzle with 8 columns and 7 rows with 4 square, 4 tee, 2 bars, 1 step left, 1 step right, 1 l left and 1 l right, the application has to go through 577 289 330 256 198 172 046 386 176 combinations of pieces. It's why there is the option "first", to stop after finding the first solution (no need to find all solutions for the game).
+
+## Tools chains
+
+### Windows
+
+- **Editor:** visual studio code - 1.23.1
+  - C/C++ - Microsoft extension
+  - C/C++ Snippets - Harsh extesnion
+  - C/C++ Advanced Lint - Joseph Benden extension
+- **Linter:** clang - LLVM-6.0.0-win64
+- **Builder:** mingw32-make - GNU Make 4.2.1
+- **Compiler / Assembler / Linker:** mingw-w64 - 8.1.0, x86_64, posix threads, seh exceptions, rt_v6-rev0
+- **Debugger:**
+
+### Ubuntu
+
+- **Editor:** visual studio code - 1.23.1
+  - C/C++ - Microsoft extension
+  - C/C++ Snippets - Harsh extesnion
+  - C/C++ Advanced Lint - Joseph Benden extension
+- **Linter:**
+- **Builder:**
+- **Compiler / Assembler / Linker:**
+- **Debugger:**
 
 ## Todo
 
