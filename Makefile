@@ -1,42 +1,38 @@
 SRCDIR = src
-HEADDIR = include
 BUILDDIR = build
 BINDIR = bin
+SRCEXT = cpp
 
 CC = g++
 CFLAGS = -g -Wall
 
-INC := -I $(HEADDIR)
-LIB = -L lib
+INC = -I include -isystem ../lib/boost_1_67_0
+LIB = -L lib -llibboost_program_options-mgw81-x64-1_67
+
+TARGET := $(BINDIR)/talospuzzle
 
 ifeq ($(OS),Windows_NT)
-	TARGET := $(BINDIR)\talospuzzle.exe
-    SOURCES := $(SRCDIR)\$(shell dir /b $(SRCDIR))
-	ifeq ($(SOURCES),$(SRCDIR)\)
-		SOURCES :=
-	endif
-	HEADERS := $(HEADDIR)\$(shell dir /b $(HEADDIR))
-	ifeq ($(HEADERS),$(HEADDIR)\)
-		HEADERS :=
-	endif
-	OBJECTS := $(patsubst $(SRCDIR)\\%,$(BUILDDIR)\\%,$(SOURCES:.cpp=.o))
-	CLEAN_CMD := del $(OBJECTS) $(TARGET)
+	SOURCES := $(addprefix $(SRCDIR)/,$(shell dir /b $(SRCDIR)\*.$(SRCEXT)))
+	OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+	MKDIR_CMD := if not exist $(BUILDDIR) mkdir $(BUILDDIR)
+	CLEAN_CMD := $(subst /,\,del $(OBJECTS) $(TARGET).exe 2> nul && rmdir $(BUILDDIR) 2> nul)
 else
-	TARGET := $(BINDIR)/talospuzzle
-    SOURCES := $(SRCDIR)/$(shell ls $(SRCDIR))
-	HEADERS := $(HEADDIR)/$(shell ls $(HEADDIR))
-	OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.cpp=.o))
-	CLEAN_CMD := $(RM) $(OBJECTS) $(TARGET)
+	SOURCES := $(addprefix $(SRCDIR)/,$(shell ls $(SRCDIR)\*.$(SRCEXT)))
+	OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+	MKDIR_CMD := mkdir -p $(BUILDDIR)
+	CLEAN_CMD := $(RM) -r $(BUILDDIR) $(TARGET)
 endif
 
 $(TARGET): $(OBJECTS)
 	@echo Linking...
 	$(CC) $^ -o $(TARGET) $(LIB)
 
-$(OBJECTS): $(SOURCES) $(HEADERS)
-	@echo Building...
-	$(CC) $(CFLAGS) $(INC) -c -o $@ $(SOURCES)
+$(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
+	@echo Compiling...
+	@$(MKDIR_CMD)
+	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
+.PHONY: clean
 clean:
 	@echo Cleaning...
-	$(CLEAN_CMD)	
+	@$(CLEAN_CMD) || exit 0
