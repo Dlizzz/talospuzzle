@@ -18,7 +18,25 @@
             },
             "cStandard": "c11",
             "cppStandard": "c++17"
-        }
+        },
+        {
+            "name": "Linux",
+            "intelliSenseMode": "clang-x64",
+            "compilerPath": "gcc",
+            "includePath": [
+                "${workspaceFolder}/include"
+            ],
+            "defines": [],
+            "browse": {
+                "path": [
+                    "${workspaceFolder}"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            },
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }        
     ],
     "version": 4
 }

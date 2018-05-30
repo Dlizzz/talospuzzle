@@ -4,9 +4,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build (Windows)",
+            "label": "Build",
             "type": "shell",
-            "command": "mingw32-make",
+            "command": "make",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -16,7 +16,7 @@
         {
             "label": "Clean",
             "type": "shell",
-            "command": "mingw32-make clean",
+            "command": "make clean",
             "problemMatcher": []
         }
     ]
