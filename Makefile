@@ -4,13 +4,14 @@ BINDIR = bin
 SRCEXT = cpp
 
 CC = g++
-CFLAGS = -g -Wall
+CFLAGS = -g -Wall -std=c++17
+LFLAGS =
 
 TARGET := $(BINDIR)/talospuzzle
 
 ifeq ($(OS),Windows_NT)
-	INC = -I include -isystem ../lib/boost_1_67_0
-	LIB = -L ../lib/boost_1_67_0 -l libboost_program_options-mgw81-x64-1_67
+	INC = -I include -isystem ../lib/boost
+	LIB = -L ../lib/boost/stage/lib -l libboost_program_options-mgw81-mt-d-x64-1_67
 	SOURCES := $(addprefix $(SRCDIR)/,$(shell dir /b $(SRCDIR)\*.$(SRCEXT)))
 	OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
 	MKDIR_CMD := if not exist $(BUILDDIR) mkdir $(BUILDDIR)
@@ -26,7 +27,7 @@ endif
 
 $(TARGET): $(OBJECTS)
 	@echo Linking...
-	$(CC) $^ -t -o $(TARGET) $(LIB)
+	$(CC) $^ $(LFLAGS) -o $(TARGET) $(LIB)
 
 $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@echo Compiling...

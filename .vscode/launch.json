@@ -25,7 +25,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "Build (Windows)"
+            "preLaunchTask": "Build"
         },
         {
             "name": "Debug (Linux)",
@@ -48,7 +48,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "Build (Linux)"
+            "preLaunchTask": "Build"
         }
     ]
 }

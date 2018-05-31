@@ -1,5 +1,7 @@
 // Header file for Class Params
 
+#include <unordered_map>
+
 class Params
 {
   private:

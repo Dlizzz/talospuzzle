@@ -14,21 +14,25 @@
     "materialTheme.accentPrevious": "",
     "materialTheme.accent": "Cyan",
     "c-cpp-flylint.clang.executable": "clang.exe",
+    "c-cpp-flylint.clang.standard": [
+        "c11",
+        "c++17"
+    ],
     "c-cpp-flylint.cppcheck.executable": "cppcheck.exe",
     "c-cpp-flylint.cppcheck.suppressions": [
         "missingIncludeSystem"
     ],
-    "c-cpp-flylint.flexelint.enable": false,
-    "c-cpp-flylint.standard": [
+    "c-cpp-flylint.cppcheck.standard": [
         "c11",
-        "c++14"
+        "c++11"
     ],
+    "c-cpp-flylint.flexelint.enable": false,
     "c-cpp-flylint.includePaths": [
         "include",
-        "../lib/boost_1_67_0/boost"
+        "../lib/boost"
     ],
     "c-cpp-flylint.excludeFromWorkspacePaths": [
-        "../lib/boost_1_67_0/boost"
+        "../lib/boost"
     ],
     "[cpp]": {
         "editor.tabSize": 2,
