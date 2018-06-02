@@ -3,22 +3,17 @@
         {
             "name": "Win32",
             "intelliSenseMode": "clang-x64",
-            "compilerPath": "gcc.exe",
+            "compilerPath": "g++.exe",
             "includePath": [
-                "${workspaceFolder}/include",
-                "${workspaceFolder}/../lib/boost",
-                "C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++",
-                "C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32",
-                "C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1"
+                "${workspaceFolder}",
+                "${workspaceFolder}\\include",
+                "\\\\catsserver\\matou\\Projects\\Development\\c++\\lib\\boost_1_67_0"
             ],
             "defines": [],
             "browse": {
                 "path": [
-                    "${workspaceFolder}/include",
-                    "${workspaceFolder}/../lib/boost",
-                    "C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++",
-                    "C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/x86_64-w64-mingw32",
-                    "C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/lib/gcc/x86_64-w64-mingw32/8.1.0/include/c++/tr1"
+                    "${workspaceFolder}",
+                    "\\\\catsserver\\matou\\Projects\\Development\\c++\\lib\\boost_1_67_0"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
@@ -29,9 +24,9 @@
         {
             "name": "Linux",
             "intelliSenseMode": "clang-x64",
-            "compilerPath": "gcc",
+            "compilerPath": "g++",
             "includePath": [
-                "${workspaceFolder}/include"
+                "${workspaceFolder}"
             ],
             "defines": [],
             "browse": {
