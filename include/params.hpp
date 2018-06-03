@@ -1,11 +1,19 @@
 // Header file for Class Params
 
-#ifndef _PARAMS_HPP
+#if !defined(_PARAMS_HPP)
 #define _PARAMS_HPP
 
 #include <string>
 #include <unordered_map>
+#if defined(WINDOWS)
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem::v1;
+#endif
+#if defined(LINUX)
 #include <filesystem>
+namespace fs = std::filesystem:;
+#endif
+
 
 class Params
 {
@@ -24,7 +32,7 @@ class Params
     std::string fillColor_;                           // HTML name of the fill color for the cells
     std::string borderColor_;                         // HTML name of the border color for the cells  
     std::unordered_map<std::string, int> piecesSet_;  // # of each piece to solve the puzzle
-    std::filesystem::path outputDir_;                 // directory where to save the png images
+    fs::path outputDir_;							  // directory where to save the png images
 };
 
 #endif // _PARAMS_HPP

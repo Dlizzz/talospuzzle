@@ -9,8 +9,14 @@
 #include <iostream>
 #include <iterator>
 #include <string>
+#if defined(WINDOWS)
+#include <experimental/filesystem>
+namespace fs = std::experimental::filesystem::v1;
+#endif
+#if defined(LINUX)
 #include <filesystem>
-namespace fs = std::filesystem;
+namespace fs = std::filesystem:;
+#endif
 
 #include "boost/program_options.hpp"
 namespace po = boost::program_options;
@@ -88,12 +94,12 @@ Params::Params(int ac, char* av[])
       )
       (
         "cell-size #",
-        po::value<int>(&celSize_)->default_value(100),
+        po::value<int>(&cellSize_)->default_value(100),
         "Size in pixels of one cell of the board (default: 100)"
       )
       (
         "shape-color colorname",
-        po::value<string>(&shapeColor_)->default_value("Yellow"),
+        po::value<string>(&borderColor_)->default_value("Yellow"),
         "Color name (HTML) of the shape color (default: Yellow)"
       )
       (

@@ -1,3 +1,9 @@
+## Specific ignore
+##
+*.sln
+*.vcxproj
+*.filters
+
 ## Visual Studio Code gitignore
 ##
 
@@ -15,11 +21,11 @@
 *.slo
 *.lo
 *.o
-# *.obj - Already in VS gitignore
+*.obj
 
 # Precompiled Headers
 *.gch
-# *.pch - Already in VS gitignore
+*.pch
 
 # Compiled Dynamic libraries
 *.so
