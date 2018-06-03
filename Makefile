@@ -1,5 +1,5 @@
 SRCDIR = src
-BUILDDIR = build
+BUILDDIR = bld
 BINDIR = bin
 SRCEXT = cpp
 
