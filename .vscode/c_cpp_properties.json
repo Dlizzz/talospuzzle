@@ -6,14 +6,16 @@
             "compilerPath": "g++.exe",
             "includePath": [
                 "${workspaceFolder}",
-                "${workspaceFolder}\\include",
-                "\\\\catsserver\\matou\\Projects\\Development\\c++\\lib\\boost_1_67_0"
+                "${workspaceFolder}/include",
+                "Z:/Projects/Development/c++/lib/boost_1_67_0",
+                "D:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/x86_64-w64-mingw32/include"
             ],
             "defines": [],
             "browse": {
                 "path": [
                     "${workspaceFolder}",
-                    "\\\\catsserver\\matou\\Projects\\Development\\c++\\lib\\boost_1_67_0"
+                    "Z:/Projects/Development/c++/lib/boost_1_67_0",
+                    "D:/Program Files/mingw-w64"
                 ],
                 "limitSymbolsToIncludedHeaders": true,
                 "databaseFilename": ""
