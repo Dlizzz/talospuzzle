@@ -1,4 +1,4 @@
 build/
 bin/
-
-/.vs
+.vscode/
+.vs/
