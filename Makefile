@@ -8,22 +8,12 @@ CFLAGS = -g -Wall -std=c++17
 LFLAGS =
 
 TARGET := $(BINDIR)/talospuzzle
-
-ifeq ($(OS),Windows_NT)
-	INC = -I include -isystem ../lib/boost_1_67_0
-	LIB = -L ../lib/boost_1_67_0/stage/lib -l libboost_program_options-mgw81-mt-x64-1_67
-	SOURCES := $(addprefix $(SRCDIR)/,$(shell dir /b $(SRCDIR)\*.$(SRCEXT)))
-	OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-	MKDIR_CMD := if not exist $(BUILDDIR) mkdir $(BUILDDIR)
-	CLEAN_CMD := $(subst /,\,del $(OBJECTS) $(TARGET).exe 2> nul && rmdir $(BUILDDIR) 2> nul)
-else
-	INC = -I include
-	LIB = -l boost_program_options
-	SOURCES := $(shell ls $(SRCDIR)/*.$(SRCEXT))
-	OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
-	MKDIR_CMD := mkdir -p $(BUILDDIR)
-	CLEAN_CMD := $(RM) -r $(BUILDDIR) $(TARGET)
-endif
+INC = -I include
+LIB = -l boost_program_options
+SOURCES := $(shell ls $(SRCDIR)/*.$(SRCEXT))
+OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+MKDIR_CMD := mkdir -p $(BUILDDIR)
+CLEAN_CMD := $(RM) -r $(BUILDDIR) $(TARGET)
 
 $(TARGET): $(OBJECTS)
 	@echo Linking...
