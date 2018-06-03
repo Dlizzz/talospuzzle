@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "*.cpp": "cpp",
-        "filesystem": "cpp"
-    },
-    "C_Cpp.intelliSenseEngineFallback": "Enabled"
-}
