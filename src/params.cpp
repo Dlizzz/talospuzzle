@@ -21,7 +21,8 @@ namespace fs = std::filesystem:;
 #include "boost/program_options.hpp"
 namespace po = boost::program_options;
 
-#include "params.hpp"
+#include "params.h"
+#include "exceptions.h"
 
 using namespace std;
 
@@ -93,19 +94,18 @@ void Params::getParams(int ac, char* av[])
     globalOptions.add_options()
         ("help", DESCRIPTION_TEXT.c_str())
         (
-            "verbose",
-            po::bool_switch(&verbose_),
-            "Print progress status on stdout (toggle)"
-        )
+			"verbose",
+			po::bool_switch()->default_value(false),
+			"Print progress status on stdout (toggle)"
+		)
         (
-            "first",
-            po::bool_switch(&first_),
-            "Stop at first solution found (toggle)"
-        )
+			"first",
+			po::bool_switch()->default_value(false),
+			"Stop at first solution found (toggle)")
         (
             "stats",
-            po::bool_switch(&stats_),
-            "Save puzzle solving statistics in CSV format (toggle)"
+			po::bool_switch()->default_value(false),
+			"Save puzzle solving statistics in CSV format (toggle)"
         );
 
     po::options_description imagesOptions("Images options");

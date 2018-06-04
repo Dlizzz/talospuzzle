@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "params.hpp"
+#include "params.h"
 
 using namespace std;
 

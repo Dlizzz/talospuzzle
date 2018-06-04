@@ -1,7 +1,5 @@
 // Header file for Class Params
-
-#if !defined(_PARAMS_HPP)
-#define _PARAMS_HPP
+#pragma once
 
 #include <string>
 #include <unordered_map>
@@ -35,5 +33,3 @@ class Params
         std::unordered_map<std::string, int> piecesSet_;  // # of each piece to solve the puzzle
         fs::path outputDir_;							  // directory where to save the png images
 };
-
-#endif // _PARAMS_HPP
