@@ -1,17 +1,16 @@
-SRCDIR = src
 BUILDDIR = bld
 BINDIR = bin
 SRCEXT = cpp
 
 CC = g++
-CFLAGS = -g -Wall -std=c++17
+CFLAGS = -c -g -Wall -std=c++17
 LFLAGS =
 
 TARGET := $(BINDIR)/talospuzzle
-INC = -I include
+INC =
 LIB = -l boost_program_options
-SOURCES := $(shell ls $(SRCDIR)/*.$(SRCEXT))
-OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+SOURCES := $(shell ls *.$(SRCEXT))
+OBJECTS := $(addprefix $(BUILDDIR)/,$(SOURCES:.$(SRCEXT)=.o))
 MKDIR_CMD := mkdir -p $(BUILDDIR)
 CLEAN_CMD := $(RM) -r $(BUILDDIR) $(TARGET)
 
@@ -19,10 +18,10 @@ $(TARGET): $(OBJECTS)
 	@echo Linking...
 	$(CC) $^ $(LFLAGS) -o $(TARGET) $(LIB)
 
-$(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
+$(BUILDDIR)/%.o: %.$(SRCEXT)
 	@echo Compiling...
 	@$(MKDIR_CMD)
-	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
+	$(CC) $(CFLAGS) $(INC) -o $@ $<
 
 .PHONY: clean
 clean:
