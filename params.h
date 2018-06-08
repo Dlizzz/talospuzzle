@@ -1,8 +1,6 @@
 // Header file for Class Params
 #pragma once
 
-#include <string>
-#include <unordered_map>
 #include <memory>
 
 #pragma warning (push)
