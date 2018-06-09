@@ -8,4 +8,6 @@
 
 using namespace std;
 
+PiecesSet::PiecesSet(const PiecesBag& bag, const Params& params) {
 
+}

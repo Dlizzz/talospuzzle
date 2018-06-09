@@ -227,3 +227,7 @@ bool Params::getParams(int ac, char* av[]) {
 void Params::printHelp() const {
 	cout << *_options << "\n" << DESCRIPTION_TEXT << "\n";
 }
+
+int Params::getPieceCount(const std::string &piece) {
+    return 3;
+}
