@@ -35,5 +35,5 @@ int main(int ac, char* av[]) {
         exit(EXIT_FAILURE);
     }
 
-    cout << piecesBag; 
+    PiecesSet pieceSet(piecesBag, params);
 }

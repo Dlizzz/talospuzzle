@@ -12,11 +12,11 @@ public:
 	Params() noexcept;
 	bool getParams(int ac, char* av[]);
 	void printHelp() const;
-    int getPieceCount(const std::string &piece);
+    int getPieceCount(const std::string &piece) const;
   
 private:
 	std::unique_ptr<boost::program_options::options_description> _options;
     std::unique_ptr<boost::program_options::variables_map> _vm;
-    int _lineLenght;
-    int _descriptionLength;
+    unsigned int _lineLenght;
+    unsigned int _descriptionLength;
 };

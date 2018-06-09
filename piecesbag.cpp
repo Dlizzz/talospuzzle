@@ -23,7 +23,7 @@ PiecesBag piecesBag {
         {0, 1, 1},
         {1, 1, 0}
     }}},
-    {"step-let", { "Step Left", "SL", 2, {
+    {"step-left", { "Step Left", "SL", 2, {
         {1, 1, 0},
         {0, 1, 1}
     }}},

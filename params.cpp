@@ -19,43 +19,18 @@ namespace po = boost::program_options;
 namespace fs = boost::filesystem;
 
 #include "params.h"
+#include "piecesbag.h"
 #include "errors.h"
 #include "helpers.h"
 
 using namespace std;
 
 static const string DESCRIPTION_TEXT = "Description:\nTry to solve the given puzzle and print"
-    " status or solution if it exists on stdout.\n"
-    "Puzzle board is made of Rows x Columns cells.\n"
-    "- Column is the horizontal dimension.\n"
-    "- Row is the vertical dimension.\n"
-    "The puzzle can use the following pieces:\n"
-    "- Square shape:\n"
-    "\tXX\n"
-    "\tXX\n"
-    "- L right shape:\n"
-    "\tXX\n"
-    "\tX\n"
-    "\tX\n"
-    "- L left shape:\n"
-    "\tXX\n"
-    "\t X\n"
-    "\t X\n"
-    "- Bar shape:\n"
-    "\tX\n"
-    "\tX\n"
-    "\tX\n"
-    "\tX\n"
-    "- Tee shape:\n"
-    "\t X\n"
-    "\tXXX\n"
-    "- Step right shape:\n"
-    "\t XX\n"
-    "\tXX\n"
-    "- Step left shape:\n"
-    "\tXX\n"
-    "\t XX\n"
-    "The pieces can be flipped horizontally and vertically.\n";
+" status or solution if it exists on stdout.\n"
+"Puzzle board is made of Rows x Columns cells.\n"
+"- Column is the horizontal dimension.\n"
+"- Row is the vertical dimension.\n"
+"The puzzle can use the following pieces:\n";
 
 static const string CAPTION = "talospuzzle.exe --rows # --columns # [options]\nAvailable options"; 
 
@@ -225,9 +200,18 @@ bool Params::getParams(int ac, char* av[]) {
 }
 
 void Params::printHelp() const {
-	cout << *_options << "\n" << DESCRIPTION_TEXT << "\n";
+	cout << *_options << "\n" << DESCRIPTION_TEXT << piecesBag;
 }
 
-int Params::getPieceCount(const std::string &piece) {
-    return 3;
+int Params::getPieceCount(const std::string &piece) const {
+    int count;    
+ 
+    try {
+        _options->find(piece, false);
+        count = (*_vm)[piece].as<int>();
+    }
+    catch (po::unknown_option &e) {
+        count = 0;
+    }
+    return count;
 }
