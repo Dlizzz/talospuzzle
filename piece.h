@@ -3,21 +3,20 @@
 #include <string>
 #include <vector>
 
-typedef std::vector<std::vector<int>> matrix;
+typedef std::vector<std::vector<int>> Pattern;
 
-class Piece {
+class Piece: public std::vector<Pattern> {
 public:
     Piece(
         const std::string &name, 
         const std::string &label, 
         long patternsCount,
-        const matrix &initialPattern
+        const Pattern &initialPattern
     );
     friend std::ostream& operator<<(std::ostream &out, const Piece &p);
     
 private:
     std::string _name;
     std::string _label;
-    std::vector<matrix> _patterns;
 };
 

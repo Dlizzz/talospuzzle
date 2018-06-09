@@ -15,13 +15,13 @@ Piece::Piece(
     const std::string &name,
     const std::string &label, 
     long patternsCount,
-    const matrix &initialPattern
+    const Pattern &initialPattern
 ): _name(name), _label(label) {
     // Add all patterns for the piece, by rotating the initial pattern
-    // Patterns are (rows, columns) matrix
-    _patterns.push_back(initialPattern);
+    // Patterns are (rows, columns) pattern
+    push_back(initialPattern);
     for (int i = 1; i < patternsCount; i++) {
-        _patterns.push_back(rot90(_patterns.back()));
+        push_back(rot90(back()));
     }
 }
 
@@ -39,7 +39,7 @@ std::ostream& operator<<(std::ostream &out, const Piece &p) {
 
     out << header << newline;
     for (auto c: header) out << underline;
-    for (auto pattern: p._patterns) {
+    for (auto pattern: p) {
         out << newline;
         for (auto row: pattern) {
             out << space;

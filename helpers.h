@@ -5,12 +5,12 @@
 #include <vector>
 
 /*  
-Matrix helpers
-Matrix are 2d arrays (rows, cols), using vector of vector 
+Pattern helpers
+Pattern are 2d arrays (rows, cols), using vector of vector 
 */
 
 /*
-Return a 90° rotated copy of the given matrix
+Return a 90° rotated copy of the given pattern
 */
 template <class T> std::vector<std::vector<T>> rot90(const std::vector<std::vector<T>> &in) {
     // Outer vector elements are lines, inner vectors elements are columns
