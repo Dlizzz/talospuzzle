@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "params.h"
+#include "piecesbag.h"
 #include "piecesset.h"
 #include "errors.h"
 
@@ -34,5 +35,5 @@ int main(int ac, char* av[]) {
         exit(EXIT_FAILURE);
     }
 
-    dumpPiecesBag();
+    cout << piecesBag; 
 }

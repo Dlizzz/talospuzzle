@@ -7,4 +7,3 @@ class piecesSet: public std::vector<Piece> {
 
 };
 
-void dumpPiecesBag();
