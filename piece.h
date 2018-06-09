@@ -13,7 +13,7 @@ public:
         long patternsCount,
         const matrix &initialPattern
     );
-    friend std::ostream& operator<< (std::ostream &out, const Piece& piece);
+    friend std::ostream& operator<<(std::ostream &out, const Piece &p);
     
 private:
     std::string _name;

@@ -28,17 +28,26 @@ Piece::Piece(
 /*
 << operator overload for Piece class
 */
-std::ostream& operator<<(std::ostream &out, const Piece& p) {
-    out << p._name << " (" << p._label << ")";
-    for (auto pattern : p._patterns) {
-        out << "\n";
-        for (auto row : pattern) {
-            out << " |";
-            for (auto col: row)
-                out << (col == 1 ? "X" : " ") << " ";
-            out << "\b|\n";
+std::ostream& operator<<(std::ostream &out, const Piece &p) {
+    const char underline = char(238);
+    const char block = char(219);
+    const char space = *" ";
+    const char newline = *"\n";
+    string header;
+
+    header = p._name + " (" + p._label + ")";
+
+    out << header << newline;
+    for (auto c: header) out << underline;
+    for (auto pattern: p._patterns) {
+        out << newline;
+        for (auto row: pattern) {
+            out << space;
+            for (auto col: row) out << (col == 1 ? block : space);
+            out << newline;
         }
     }
-    out << "\n";
+    out << newline;
+
     return out;
 }
