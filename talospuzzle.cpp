@@ -25,7 +25,7 @@ int main(int ac, char* av[]) {
 #endif 
 
     try {
-        if (not params.getParams(ac, av)) {
+        if (not params.readParams(ac, av)) {
             params.printHelp();
             exit(EXIT_SUCCESS);
         }
