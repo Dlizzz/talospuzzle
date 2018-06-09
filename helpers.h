@@ -40,7 +40,8 @@ template <class T> std::vector<std::vector<T>> rot90(const std::vector<std::vect
 }
 
 // HTML Colors helpers
-class ErrorColor: public std::exception {
+class ErrorColor: 
+    public std::exception {
 public:
     ErrorColor(const char* msg) noexcept;
 };

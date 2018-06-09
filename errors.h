@@ -3,7 +3,8 @@
 #include <exception>
 #include <string>
 
-class ErrorParams: public std::exception {
+class ErrorParams: 
+    public std::exception {
 public:
     ErrorParams(const std::string &msg);
     ErrorParams(const char *msg);

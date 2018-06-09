@@ -7,7 +7,8 @@
 
 typedef std::unordered_map<std::string, Piece> PiecesDef;
 
-class PiecesBag: public PiecesDef  {
+class PiecesBag: 
+    public PiecesDef  {
 public:
     using PiecesDef::PiecesDef;
     friend std::ostream& operator<<(std::ostream &out, const PiecesBag &bag);

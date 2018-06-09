@@ -5,7 +5,8 @@
 #include "piecesbag.h"
 #include "piece.h"
 
-class PiecesSet: public std::vector<Piece> {
+class PiecesSet: 
+    private std::vector<Piece> {
 public:
     PiecesSet(const PiecesBag& bag, const Params& params);
 };

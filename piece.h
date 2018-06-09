@@ -4,8 +4,10 @@
 #include <vector>
 
 typedef std::vector<std::vector<int>> Pattern;
+typedef std::vector<std::vector<int>> Position;
 
-class Piece: public std::vector<Pattern> {
+class Piece: 
+    private std::vector<Pattern> {
 public:
     Piece(
         const std::string &name, 

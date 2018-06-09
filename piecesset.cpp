@@ -15,5 +15,4 @@ PiecesSet::PiecesSet(const PiecesBag& bag, const Params& params) {
         pieceCount = params.getPieceCount(piece.first);
         for (int i = 0; i < pieceCount; i++) push_back(piece.second);
     }
-
 }

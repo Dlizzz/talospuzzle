@@ -15,6 +15,8 @@ public:
 	bool readParams(int ac, char* av[]);
 	void printHelp() const;
     int getPieceCount(const std::string &piece) const;
+    int getRows() const { return (*this)["rows"].as<int>(); };
+    int getColumns() const { return (*this)["columns"].as<int>(); };
   
 private:
     unsigned int _lineLength;
