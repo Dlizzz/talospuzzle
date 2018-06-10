@@ -11,7 +11,7 @@ class PiecesBag:
     public PiecesDef  {
 public:
     using PiecesDef::PiecesDef;
-    friend std::ostream& operator<<(std::ostream &out, const PiecesBag &bag);
+    friend std::ostream& operator<<(std::ostream& out, const PiecesBag& bag);
 };
 
 extern PiecesBag piecesBag;

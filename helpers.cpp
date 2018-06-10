@@ -157,11 +157,11 @@ static unordered_map<string, ColorValues> htmlColorsTable {
     {"White", {0xFFFFFF, 255, 255, 255}}
 };
 
-bool isValidHtmlColorName(string colorName) noexcept {
+bool isValidHtmlColorName(const string& colorName) noexcept {
     return (htmlColorsTable.count(colorName) == 1);
 }
 
-ColorValues htmlColorNameToValues(string colorName) {
+ColorValues htmlColorNameToValues(const string& colorName) {
     string msg;
 
     if (not isValidHtmlColorName(colorName)) {

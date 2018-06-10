@@ -1,14 +1,20 @@
 #pragma once
 #include <vector>
 
-template <class T> class Matrix {
-public:
-    Matrix(int rows, int columns);
-    Matrix<T> rot90(Matrix<T> &in);
-    T max(Matrix<T> &in);
+typedef std::vector<unsigned char> MatrixLineDef;
+typedef std::vector<MatrixLineDef> MatrixDef;
 
-private:
-    std::vector<std::vector<T>> 
-    int _rows;
-    int _columns;
+class Matrix:
+    public MatrixDef {
+public:
+    using MatrixDef::MatrixDef;
+    Matrix() noexcept;
+    Matrix(unsigned int ro, unsigned int col);
+    bool add(const Matrix& matrix, unsigned int toRow, unsigned int toCol);
+    Matrix rot90() const;
+    unsigned int rows() const;
+    unsigned int columns() const;
 };
+
+inline unsigned int Matrix::rows() const { return size(); }
+inline unsigned int Matrix::columns() const { return front().size(); }

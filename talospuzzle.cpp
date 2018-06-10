@@ -30,7 +30,7 @@ int main(int ac, char* av[]) {
             exit(EXIT_SUCCESS);
         }
     }
-    catch (ErrorParams &e) {
+    catch (ErrorParams& e) {
         cout << e.what() << "\n";
         exit(EXIT_FAILURE);
     }

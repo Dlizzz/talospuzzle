@@ -14,11 +14,14 @@ public:
 	Params() noexcept;
 	bool readParams(int ac, char* av[]);
 	void printHelp() const;
-    int getPieceCount(const std::string &piece) const;
-    int getRows() const { return (*this)["rows"].as<int>(); };
-    int getColumns() const { return (*this)["columns"].as<int>(); };
+    int getPieceCount(const std::string& piece) const;
+    int getRows() const;
+    int getColumns() const;
   
 private:
     unsigned int _lineLength;
     unsigned int _descriptionLength;
 };
+
+inline int Params::getRows() const { return (*this)["rows"].as<int>(); };
+inline int Params::getColumns() const { return (*this)["columns"].as<int>(); };

@@ -3,6 +3,7 @@
 
 #include "piece.h"
 #include "helpers.h"
+#include "matrix.h"
 
 using namespace std;
 
@@ -12,23 +13,28 @@ Initialize the piece with all its patterns, by rotating the initial pattern 'pat
 of time
 */
 Piece::Piece(
-    const std::string &name,
-    const std::string &label, 
+    const std::string& name,
+    const std::string& label, 
     long patternsCount,
-    const Pattern &initialPattern
+    const Matrix& initialPattern
 ): _name(name), _label(label) {
     // Add all patterns for the piece, by rotating the initial pattern
     // Patterns are (rows, columns) pattern
     push_back(initialPattern);
     for (int i = 1; i < patternsCount; i++) {
-        push_back(rot90(back()));
+        push_back(back().rot90());
     }
 }
 
+void Piece::generatePositions(int rows, int columns) {
+    Matrix position(rows, columns);
+
+}
+
 /*
-<< operator overload for Piece class
+Operator << overload for Piece class
 */
-std::ostream& operator<<(std::ostream &out, const Piece &p) {
+std::ostream& operator<<(std::ostream& out, const Piece& p) {
     const char underline = char(238);
     const char block = char(219);
     const char space = *" ";
@@ -51,3 +57,4 @@ std::ostream& operator<<(std::ostream &out, const Piece &p) {
 
     return out;
 }
+

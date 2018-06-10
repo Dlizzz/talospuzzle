@@ -198,7 +198,7 @@ bool Params::readParams(int ac, char* av[]) {
 		po::notify(*this);
         return true;
 	}
-	catch(po::error &e) {
+	catch(po::error& e) {
         throw ErrorParams(e.what());
 	}
 }
@@ -207,7 +207,7 @@ void Params::printHelp() const {
 	cout << *this << "\n" << DESCRIPTION_TEXT << piecesBag;
 }
 
-int Params::getPieceCount(const std::string &piece) const {
+int Params::getPieceCount(const std::string& piece) const {
     int count;    
  
     try {

@@ -4,14 +4,12 @@
 
 using namespace std;
 
-ErrorParams::ErrorParams(const string &msg) {
+Errors::Errors(const string& msg) {
     _msg = "Fatal - talospuzzle command line error: ";
     _msg.append(msg);
 }
 
-ErrorParams::ErrorParams(const char* msg) {
+Errors::Errors(const char* msg) {
     _msg = "Fatal - talospuzzle command line error: ";
     _msg.append(msg);
 }
-
-const char* ErrorParams::what() { return _msg.c_str(); }
