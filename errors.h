@@ -21,9 +21,3 @@ class ErrorParams:
 public:
     using Errors::Errors;
 };
-
-class ErrorMatrix: 
-    public Errors {
-public:
-    using Errors::Errors;
-};
