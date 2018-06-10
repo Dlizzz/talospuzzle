@@ -6,6 +6,14 @@
 
 using namespace std;
 
-puzzle::puzzle(const Params& params): 
+Puzzle::Puzzle(const Params& params): 
     Board(params.getRows(), params.getColumns()),
-    PiecesSet(piecesBag, params) {}
+    PiecesSet(piecesBag, params),
+    _verbose(params.getVerbose()), _first(params.getFirst()), _stats(params.getStats()) {
+
+    for (auto piece : *this) piece.generatePositions(boardRows, boardColumns);
+}
+
+void Puzzle::solve() {
+
+}

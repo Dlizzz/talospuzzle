@@ -7,11 +7,8 @@
 
 using namespace std;
 
-/*
-Piece constructor with name, label, # of patterns and initial pattern
-Initialize the piece with all its patterns, by rotating the initial pattern 'patternsCount' number
-of time
-*/
+//Initialize the piece with all its patterns, by rotating the initial pattern 'patternsCount' number
+//of time
 Piece::Piece(
     const std::string& name,
     const std::string& label, 
@@ -27,16 +24,25 @@ Piece::Piece(
 }
 
 void Piece::generatePositions(int rows, int columns) {
-    Matrix position(rows, columns);
+    unsigned int row, col, maxRow, maxCol;
 
+    for (auto pattern : (*this)) {
+        if ((pattern.rows() > rows) || (pattern.columns() > columns)) break;
+        maxRow = rows - pattern.rows();
+        maxCol = columns - pattern.columns();
+        for (row = 0; row <= maxRow; ++row) {
+            for (col = 0; col <= maxCol; ++col) {
+                Matrix position(rows, columns);
+                position.paste(pattern, row, col);
+                _positions.push_back(position);
+            }
+        }
+    }
 }
 
-/*
-Operator << overload for Piece class
-*/
+//Operator << overload for Piece class
 std::ostream& operator<<(std::ostream& out, const Piece& p) {
     const char underline = char(238);
-    const char block = char(219);
     const char space = *" ";
     const char newline = *"\n";
     string header;
@@ -46,12 +52,7 @@ std::ostream& operator<<(std::ostream& out, const Piece& p) {
     out << header << newline;
     for (auto c: header) out << underline;
     for (auto pattern: p) {
-        out << newline;
-        for (auto row: pattern) {
-            out << space;
-            for (auto col: row) out << (col == 1 ? block : space);
-            out << newline;
-        }
+        out << newline << pattern;
     }
     out << newline;
 

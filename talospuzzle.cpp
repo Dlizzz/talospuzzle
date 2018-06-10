@@ -5,6 +5,7 @@
 #include "params.h"
 #include "piecesbag.h"
 #include "piecesset.h"
+#include "puzzle.h"
 #include "errors.h"
 
 using namespace std;
@@ -24,6 +25,7 @@ int main(int ac, char* av[]) {
     atexit(exit_handler);
 #endif 
 
+    // Read the parameters from command line
     try {
         if (not params.readParams(ac, av)) {
             params.printHelp();
@@ -35,5 +37,6 @@ int main(int ac, char* av[]) {
         exit(EXIT_FAILURE);
     }
 
-    PiecesSet pieceSet(piecesBag, params);
+    // Create the puzzle from parameters
+    Puzzle puzzle(params);
 }

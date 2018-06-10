@@ -17,6 +17,9 @@ public:
     int getPieceCount(const std::string& piece) const;
     int getRows() const;
     int getColumns() const;
+    bool getVerbose() const;
+    bool getFirst() const;
+    bool getStats() const;
   
 private:
     unsigned int _lineLength;
@@ -25,3 +28,6 @@ private:
 
 inline int Params::getRows() const { return (*this)["rows"].as<int>(); };
 inline int Params::getColumns() const { return (*this)["columns"].as<int>(); };
+inline bool Params::getVerbose() const { return (*this)["verbose"].as<bool>(); };
+inline bool Params::getFirst() const { return (*this)["first"].as<bool>(); };
+inline bool Params::getStats() const { return (*this)["stats"].as<bool>(); };

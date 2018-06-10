@@ -1,3 +1,4 @@
+#include <iostream>
 #include <vector>
 
 #include "matrix.h"
@@ -42,26 +43,62 @@ Matrix Matrix::rot90() const {
 // - Return bool: false if the addition was not possible due to elements being greater than 1,
 //   else true 
 bool Matrix::add(const Matrix& matrix, unsigned int toRow, unsigned int toCol) {
-    unsigned int row, col, matrixRow, matrixCol;
+    unsigned int row, col, matrixRow, matrixCol, minRows, minColumns;
 
+    minRows = rows() <= matrix.rows() + toRow ? rows() : matrix.rows() + toRow;
+    minColumns = columns() <= matrix.columns() + toCol ? columns(): matrix.columns() + toCol;
+    
     // First test if there is no element > 1 after addition, without changing the matrix
     // Loop over the current matrix, to be sure that we stay within its boundaries
-    for (row = toRow; row < rows(); ++row) {
+    for (row = toRow; row < minRows; ++row) {
         matrixRow = row - toRow;
-        for (col = toCol; col < columns(); ++col) {
+        for (col = toCol; col < minColumns; ++col) {
             matrixCol = col - toCol;
             if (((*this)[row][col] + matrix[matrixRow][matrixCol]) > 1) return false;
         }
     }
 
     // Do the real addition
-    for (row = toRow; row < rows(); ++row) {
+    for (row = toRow; row < minRows; ++row) {
         matrixRow = row - toRow;
-        for (col = toCol; col < columns(); ++col) {
+        for (col = toCol; col < minColumns; ++col) {
             matrixCol = col - toCol;
             (*this)[row][col] += matrix[matrixRow][matrixCol];
         }
     }
 
     return true;
+}
+
+void Matrix::paste(const Matrix& matrix, unsigned int toRow, unsigned int toCol) {
+    unsigned int row, col, matrixRow, matrixCol, minRows, minColumns;
+
+    // Can't paste outside of the current matrix
+    if ((toRow >= rows()) || (toCol >= columns())) return;
+
+    minRows = rows() <= matrix.rows() + toRow ? rows() : matrix.rows() + toRow;
+    minColumns = columns() <= matrix.columns() + toCol ? columns(): matrix.columns() + toCol;
+
+    for (row = toRow; row < minRows; ++row) {
+        matrixRow = row - toRow;
+        for (col = toCol; col < minColumns; ++col) {
+            matrixCol = col - toCol;
+            (*this)[row][col] = matrix[matrixRow][matrixCol];
+        }
+    }
+}
+
+std::ostream& operator<<(std::ostream& out, const Matrix& m) {
+    const char underline = char(238);
+    const char block = char(219);
+    const char empty = char(250);
+    const char space = *" ";
+    const char newline = *"\n";
+
+    for (auto row: m) {
+        out << space;
+        for (auto col: row) out << (col == 1 ? block : empty);
+        out << newline;
+    }
+    return out;
 }

@@ -6,8 +6,9 @@
 #include "piece.h"
 
 class PiecesSet: 
-    private std::vector<Piece> {
+    public std::vector<Piece> {
 public:
     PiecesSet(const PiecesBag& bag, const Params& params);
+    void optimize();
 };
 

@@ -15,6 +15,7 @@ public:
         const Matrix& initialPattern
     );
     friend std::ostream& operator<<(std::ostream& out, const Piece& p);
+    friend bool sortPiece(const Piece& a, const Piece& b);
     const std::vector<Matrix>& positions() const ;
     void generatePositions(int rows, int columns);
     
