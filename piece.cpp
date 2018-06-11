@@ -14,7 +14,8 @@ Piece::Piece(
     const std::string& label, 
     long patternsCount,
     const Matrix& initialPattern
-): _name(name), _label(label) {
+): _name(name), _label(label), _positions(new vector<Matrix>) {
+    
     // Add all patterns for the piece, by rotating the initial pattern
     // Patterns are (rows, columns) pattern
     push_back(initialPattern);
@@ -34,24 +35,24 @@ void Piece::generatePositions(int rows, int columns) {
             for (col = 0; col <= maxCol; ++col) {
                 Matrix position(rows, columns);
                 position.paste(pattern, row, col);
-                _positions.push_back(position);
+                _positions->push_back(position);
             }
         }
     }
 }
 
 //Operator << overload for Piece class
-std::ostream& operator<<(std::ostream& out, const Piece& p) {
+ostream& operator<<(ostream& out, const Piece& piece) {
     const char underline = char(238);
     const char space = *" ";
     const char newline = *"\n";
     string header;
 
-    header = p._name + " (" + p._label + ")";
+    header = piece._name + " (" + piece._label + ")";
 
     out << header << newline;
     for (auto c: header) out << underline;
-    for (auto pattern: p) {
+    for (auto pattern: piece) {
         out << newline << pattern;
     }
     out << newline;

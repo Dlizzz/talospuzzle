@@ -39,4 +39,8 @@ int main(int ac, char* av[]) {
 
     // Create the puzzle from parameters
     Puzzle puzzle(params);
+
+    // Solve the puzzle
+    puzzle.solve();
 }
+

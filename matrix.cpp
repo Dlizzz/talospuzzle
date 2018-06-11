@@ -34,42 +34,39 @@ Matrix Matrix::rot90() const {
 }
 
 // Add the given matrix to the current matrix, only if the addition doesn't lead to elements being
-// greater than 1. 
-// Function is index proof. If given matrix is too large, it will be only partially added. If given 
-// origin for addition is outside boundaries, nothing will be added. 
+// greater than 1. Both matrixes must have same size.
 // - const Matrix& matrix: the matrix to add
-// - unsigned int toRow: row of the current matrix where to add the matrix
-// - unsigned int toCol: col of the current matrix where to add the matrix
-// - Return bool: false if the addition was not possible due to elements being greater than 1,
-//   else true 
-bool Matrix::add(const Matrix& matrix, unsigned int toRow, unsigned int toCol) {
-    unsigned int row, col, matrixRow, matrixCol, minRows, minColumns;
+// - Return bool: false if the addition was not possible due to elements being greater than 1 or 
+//   matrixes not from same size; In both cases current matrix stays unchanged.
+bool Matrix::add(const Matrix& matrix) {
+    unsigned int row, col;
 
-    minRows = rows() <= matrix.rows() + toRow ? rows() : matrix.rows() + toRow;
-    minColumns = columns() <= matrix.columns() + toCol ? columns(): matrix.columns() + toCol;
-    
+    // Don't do anything if matrixes don't have same size
+    if ((rows() != matrix.rows()) || (columns() != matrix.columns())) return false;
+   
     // First test if there is no element > 1 after addition, without changing the matrix
-    // Loop over the current matrix, to be sure that we stay within its boundaries
-    for (row = toRow; row < minRows; ++row) {
-        matrixRow = row - toRow;
-        for (col = toCol; col < minColumns; ++col) {
-            matrixCol = col - toCol;
-            if (((*this)[row][col] + matrix[matrixRow][matrixCol]) > 1) return false;
+    for (row = 0; row < rows(); ++row) {
+        for (col = 0; col < columns(); ++col) {
+            if (((*this)[row][col] + matrix[row][col]) > 1) return false;
         }
     }
 
     // Do the real addition
-    for (row = toRow; row < minRows; ++row) {
-        matrixRow = row - toRow;
-        for (col = toCol; col < minColumns; ++col) {
-            matrixCol = col - toCol;
-            (*this)[row][col] += matrix[matrixRow][matrixCol];
+    for (row = 0; row < rows(); ++row) {
+        for (col = 0; col < columns(); ++col) {
+            (*this)[row][col] += matrix[row][col];
         }
     }
 
     return true;
 }
 
+// Paste (elements are replaced) the given matrix into the current matrix, at the given coordinates.
+// Function is index proof. If given matrix is too large, it will be croped. If given coordinates
+//  are outside current matrix boundaries, nothing will be pasted. 
+// - const Matrix& matrix: the matrix to add
+// - unsigned int toRow: row of the current matrix where to add the matrix
+// - unsigned int toCol: col of the current matrix where to add the matrix
 void Matrix::paste(const Matrix& matrix, unsigned int toRow, unsigned int toCol) {
     unsigned int row, col, matrixRow, matrixCol, minRows, minColumns;
 
@@ -88,7 +85,7 @@ void Matrix::paste(const Matrix& matrix, unsigned int toRow, unsigned int toCol)
     }
 }
 
-std::ostream& operator<<(std::ostream& out, const Matrix& m) {
+ostream& operator<<(ostream& out, const Matrix& m) {
     const char underline = char(238);
     const char block = char(219);
     const char empty = char(250);

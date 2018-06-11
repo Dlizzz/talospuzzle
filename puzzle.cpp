@@ -1,3 +1,4 @@
+#include <iostream>
 #include "puzzle.h"
 #include "piecesbag.h"
 #include "board.h"
@@ -15,5 +16,5 @@ Puzzle::Puzzle(const Params& params):
 }
 
 void Puzzle::solve() {
-
+    optimize();
 }

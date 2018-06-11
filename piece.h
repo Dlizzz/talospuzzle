@@ -2,11 +2,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <memory>
 #include "matrix.h"
 
-
 class Piece: 
-    private std::vector<Matrix> {
+    public std::vector<Matrix> {
 public:
     Piece(
         const std::string& name, 
@@ -14,16 +14,26 @@ public:
         long patternsCount,
         const Matrix& initialPattern
     );
-    friend std::ostream& operator<<(std::ostream& out, const Piece& p);
-    friend bool sortPiece(const Piece& a, const Piece& b);
-    const std::vector<Matrix>& positions() const ;
+    friend std::ostream& operator<<(std::ostream& out, const Piece& piece);
+    friend bool sortPiece(const Piece& a, const Piece& b) noexcept;
+    std::shared_ptr<std::vector<Matrix>> getPositions() noexcept;
+    const std::string& getName() const noexcept;
+    const std::string& getLabel() const noexcept;
     void generatePositions(int rows, int columns);
     
 private:
     std::string _name;
     std::string _label;
-    std::vector<Matrix> _positions;
+    std::shared_ptr<std::vector<Matrix>> _positions;
 };
 
-inline const std::vector<Matrix>& Piece::positions() const { return _positions; }
+inline std::shared_ptr<std::vector<Matrix>> Piece::getPositions() noexcept { return _positions; }
+inline const std::string& Piece::getName() const noexcept { return _name; }
+inline const std::string& Piece::getLabel() const noexcept { return _label; }
+
+// Sorting helper. Piece 'a' < Piece 'b', if Piece 'a' has less positions
+inline bool sortPiece(const Piece& a, const Piece& b) noexcept { 
+    return a._positions->size() < b._positions->size();
+}
+
 

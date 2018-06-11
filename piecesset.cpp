@@ -1,4 +1,6 @@
 #include <algorithm>
+#include <iostream>
+#include <string>
 
 #include "piecesset.h"
 #include "piece.h"
@@ -15,14 +17,30 @@ PiecesSet::PiecesSet(const PiecesBag& bag, const Params& params) {
     }
 }
 
-// Sorting helper. Piece a <= Piece b if Piece A has less or equal number of positions
-friend bool sortPiece(const Piece& a, const Piece& b) {
-
-}
 
 // Sort the set of pieces from the lowest number of positions to the biggest
 // then put the biggest first. It allows to have the maximum of parallel threads and to optimize
 // tree crawling.
 void PiecesSet::optimize() {
+    sort(begin(), end(), sortPiece);
+    auto it = insert(begin(), back());
+    pop_back();
+}
 
+ostream& operator<<(ostream& out, const PiecesSet& set) {
+    const char underline = char(238);
+    const char space = *" ";
+    const char newline = *"\n";
+    string header;
+
+    for (auto piece : set) {
+        header = piece.getName() + " (" + piece.getLabel() + "):\t"
+            + to_string(piece.getPositions()->size()) + " positions";
+        out << header << newline;
+        //for (auto c: header) out << underline;
+        //for (auto position: *(piece.getPositions())) out << newline << position;
+        //out << newline;
+    }
+
+    return out;
 }
