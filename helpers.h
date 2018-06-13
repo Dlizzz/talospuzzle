@@ -7,7 +7,13 @@
 class ErrorColor: 
     public std::exception {
 public:
-    ErrorColor(const char* msg) noexcept;
+    explicit ErrorColor(const std::string& msg) noexcept: _msg(msg) {}
+    explicit ErrorColor(const char* msg) noexcept: _msg(msg) {}
+    virtual ~ErrorColor() noexcept {}
+    virtual const char* what() const noexcept { return _msg.c_str(); }
+
+protected:
+    std::string _msg;
 };
 
 struct ColorValues {

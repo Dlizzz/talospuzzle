@@ -28,8 +28,6 @@ void PiecesSet::optimize() {
 }
 
 ostream& operator<<(ostream& out, const PiecesSet& set) {
-    const char underline = char(238);
-    const char space = *" ";
     const char newline = *"\n";
     string header;
 
@@ -37,9 +35,6 @@ ostream& operator<<(ostream& out, const PiecesSet& set) {
         header = piece.getName() + " (" + piece.getLabel() + "):\t"
             + to_string(piece.getPositions()->size()) + " positions";
         out << header << newline;
-        //for (auto c: header) out << underline;
-        //for (auto position: *(piece.getPositions())) out << newline << position;
-        //out << newline;
     }
 
     return out;

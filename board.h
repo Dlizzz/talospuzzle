@@ -2,9 +2,9 @@
 
 class Board {
 public:
-    Board(int ro, int co) noexcept;
+    Board(unsigned int ro, unsigned int co) noexcept;
 
 protected:
-    int boardRows;
-    int boardColumns;
+    unsigned int boardRows;
+    unsigned int boardColumns;
 };

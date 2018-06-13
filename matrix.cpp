@@ -14,7 +14,7 @@ Matrix::Matrix(unsigned int ro, unsigned int col):
 Matrix Matrix::rot90() const {
     Matrix out;
     MatrixLineDef outLine;
-    int inRow, inCol, outCol, outRow;
+    unsigned int inRow, inCol, outCol, outRow;
 
     // Current matrix columns become new matrix rows
     out.reserve(columns());
@@ -86,7 +86,6 @@ void Matrix::paste(const Matrix& matrix, unsigned int toRow, unsigned int toCol)
 }
 
 ostream& operator<<(ostream& out, const Matrix& m) {
-    const char underline = char(238);
     const char block = char(219);
     const char empty = char(250);
     const char space = *" ";

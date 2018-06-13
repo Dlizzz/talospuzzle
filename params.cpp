@@ -11,10 +11,8 @@
 #include <memory>
 
 #define BOOST_FILESYSTEM_NO_DEPRECATED
-#pragma warning (push)
 #include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
-#pragma warning (pop)
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
 
@@ -34,13 +32,13 @@ static const string DESCRIPTION_TEXT = "Description:\nTry to solve the given puz
 
 static const string CAPTION = "talospuzzle.exe --rows # --columns # [options]\nAvailable options"; 
 
-static const int LINE_LENGTH = 120;
-static const int DESCRIPTION_LENGTH = 80;
+static const unsigned int LINE_LENGTH = 120;
+static const unsigned int DESCRIPTION_LENGTH = 80;
 
 Params::Params() noexcept:
+    po::options_description(CAPTION, LINE_LENGTH, DESCRIPTION_LENGTH),
     _lineLength(LINE_LENGTH),
-    _descriptionLength(DESCRIPTION_LENGTH), 
-    po::options_description(CAPTION, LINE_LENGTH, DESCRIPTION_LENGTH) {}
+    _descriptionLength(DESCRIPTION_LENGTH) {}
 
 bool Params::readParams(int ac, char* av[]) {
     try {

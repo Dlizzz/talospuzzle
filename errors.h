@@ -3,21 +3,14 @@
 #include <exception>
 #include <string>
 
-class Errors: 
+class ErrorParams: 
     public std::exception {
 public:
-    Errors(const std::string& msg);
-    Errors(const char* msg);
-    const char* what();
+    explicit ErrorParams(const std::string& msg) noexcept;
+    explicit ErrorParams(const char* msg) noexcept;
+    virtual ~ErrorParams() noexcept {}
+    virtual const char* what() const noexcept { return _msg.c_str(); }
 
-private:
+protected:
     std::string _msg;
-};
-
-inline const char* Errors::what() { return _msg.c_str(); }
-
-class ErrorParams: 
-    public Errors {
-public:
-    using Errors::Errors;
 };
