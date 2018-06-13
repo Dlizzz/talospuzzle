@@ -71,7 +71,7 @@ bool Params::readParams(int ac, char* av[]) {
             )(
                 "output-dir",
                 po::value<fs::path>()->default_value(fs::current_path())->notifier(
-                    [](fs::path value) { if (not fs::is_directory(value)) throw ErrorParams(
+                    [](fs::path value) { if (! fs::is_directory(value)) throw ErrorParams(
                         string("--output-dir: ")
                         .append(value.string())
                         .append(" is not a directory")
@@ -89,7 +89,7 @@ bool Params::readParams(int ac, char* av[]) {
 		)(
 			"shape-color",
 			po::value<string>()->default_value("Yellow")->notifier(
-                [](string value) { if (not isValidHtmlColorName(value)) throw ErrorParams(
+                [](string value) { if (! isValidHtmlColorName(value)) throw ErrorParams(
                     string("--shape-color: ")
                     .append(value)
                     .append(" is not a valid HTML color name")
@@ -99,7 +99,7 @@ bool Params::readParams(int ac, char* av[]) {
 		)(
 			"fill-color",
 			po::value<string>()->default_value("DarkMagenta")->notifier(
-                [](string value) { if (not isValidHtmlColorName(value)) throw ErrorParams(
+                [](string value) { if (! isValidHtmlColorName(value)) throw ErrorParams(
                     string("--fill-color: ")
                     .append(value)
                     .append(" is not a valid HTML color name")

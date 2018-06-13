@@ -27,7 +27,7 @@ int main(int ac, char* av[]) {
 
     // Read the parameters from command line
     try {
-        if (not params.readParams(ac, av)) {
+        if (! params.readParams(ac, av)) {
             params.printHelp();
             exit(EXIT_SUCCESS);
         }
