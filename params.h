@@ -13,7 +13,7 @@ class Params:
 public:
 	Params() noexcept;
 	bool readParams(int ac, char* av[]);
-	void printHelp() const;
+	void printHelp(bool printDesc = true) const;
     int getPieceCount(const std::string& piece) const;
     int getRows() const;
     int getColumns() const;

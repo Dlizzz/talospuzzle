@@ -28,8 +28,6 @@ void PiecesSet::optimize() {
 }
 
 ostream& operator<<(ostream& out, const PiecesSet& set) {
-    const char underline = char(238);
-    const char space = *" ";
     const char newline = *"\n";
     string header;
 

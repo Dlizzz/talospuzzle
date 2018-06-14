@@ -34,6 +34,7 @@ int main(int ac, char* av[]) {
     }
     catch (ErrorParams& e) {
         cout << e.what() << "\n";
+        params.printHelp(false);
         exit(EXIT_FAILURE);
     }
 

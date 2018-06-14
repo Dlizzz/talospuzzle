@@ -44,7 +44,6 @@ void Piece::generatePositions(int rows, int columns) {
 //Operator << overload for Piece class
 ostream& operator<<(ostream& out, const Piece& piece) {
     const char underline = char(238);
-    const char space = *" ";
     const char newline = *"\n";
     string header;
 

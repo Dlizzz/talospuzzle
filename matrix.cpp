@@ -84,7 +84,6 @@ void Matrix::paste(const Matrix& matrix, unsigned int toRow, unsigned int toCol)
 }
 
 ostream& operator<<(ostream& out, const Matrix& m) {
-    const auto underline = char(238);
     const auto block = char(219);
     const auto empty = char(250);
     const char space = *" ";

@@ -235,8 +235,9 @@ bool Params::readParams(int ac, char* av[]) {
 	}
 }
 
-void Params::printHelp() const {
-	cout << *this << "\n" << DESCRIPTION_TEXT << piecesBag;
+void Params::printHelp(bool printDesc) const {
+    cout << *this;
+    if (printDesc) { cout << "\n" << DESCRIPTION_TEXT << piecesBag; }
 }
 
 int Params::getPieceCount(const std::string& piece) const {
