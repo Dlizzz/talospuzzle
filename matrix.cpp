@@ -7,7 +7,7 @@
 using namespace std;
 
 Matrix::Matrix(unsigned int ro, unsigned int col): 
-    vector<MatrixLineDef>(ro, MatrixLineDef(col, 0)) {}
+    MatrixDef(ro, MatrixLineDef(col, 0)) {}
 
 Matrix Matrix::rot90() const {
     Matrix out;

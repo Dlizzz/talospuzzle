@@ -19,7 +19,4 @@ Puzzle::Puzzle(const Params& params):
 void Puzzle::solve() {
     optimize();
 
-    for (auto piece : *this)
-        cout << setw(9) << left << piece.getName() << ":" << piece.getPositions()->size() 
-        << " positions\n";
 }

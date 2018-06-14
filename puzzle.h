@@ -1,9 +1,10 @@
 #pragma once
 #include <vector>
 
+#include "params.h"
 #include "board.h"
 #include "piecesset.h"
-#include "params.h"
+#include "solution.h"
 
 class Puzzle:
     private Board,
@@ -16,5 +17,6 @@ private:
     bool _verbose = false;
     bool _first = false;
     bool _stats = false;
+    std::vector<Solution> solutions;
 };
 

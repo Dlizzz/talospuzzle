@@ -7,7 +7,6 @@ using MatrixDef = std::vector<MatrixLineDef>;
 class Matrix:
     public MatrixDef {
 public:
-    using MatrixDef::MatrixDef;
     Matrix() noexcept = default;
     Matrix(unsigned int ro, unsigned int col);
     bool add(const Matrix& matrix);
