@@ -164,7 +164,7 @@ bool isValidHtmlColorName(const string& colorName) noexcept {
 ColorValues htmlColorNameToValues(const string& colorName) {
     string msg;
 
-    if (not isValidHtmlColorName(colorName)) {
+    if (! isValidHtmlColorName(colorName)) {
         msg = colorName + " is not a valid HTML color name";
         throw ErrorColor(msg.c_str());
     }
