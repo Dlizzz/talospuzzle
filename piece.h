@@ -19,7 +19,7 @@ public:
     std::shared_ptr<const std::vector<Matrix>> getPositions() const noexcept;
     const std::string& getName() const noexcept;
     const std::string& getLabel() const noexcept;
-    void generatePositions(int rows, int columns);
+    void generatePositions(unsigned int rows, unsigned int columns);
     
 private:
     std::string _name;

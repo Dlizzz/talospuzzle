@@ -12,7 +12,7 @@ Matrix::Matrix(unsigned int ro, unsigned int col):
 Matrix Matrix::rot90() const {
     Matrix out;
     MatrixLineDef outLine;
-    int inRow, inCol, outCol, outRow;
+    unsigned int inRow, inCol, outCol, outRow;
 
     // Current matrix columns become new matrix rows
     out.reserve(columns());

@@ -3,9 +3,7 @@
 #include <string>
 #include <memory>
 
-#pragma warning (push)
 #include <boost/program_options.hpp>
-#pragma warning (pop)
 
 class Params: 
     private boost::program_options::options_description, 

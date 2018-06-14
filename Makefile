@@ -8,7 +8,7 @@ LFLAGS =
 
 TARGET := $(BINDIR)/talospuzzle
 INC =
-LIB = -l boost_program_options
+LIB = -l boost_program_options -l boost_filesystem
 SOURCES := $(shell ls *.$(SRCEXT))
 OBJECTS := $(addprefix $(BUILDDIR)/,$(SOURCES:.$(SRCEXT)=.o))
 MKDIR_CMD := mkdir -p $(BUILDDIR)

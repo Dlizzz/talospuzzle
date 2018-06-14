@@ -24,7 +24,7 @@ Piece::Piece(
     }
 }
 
-void Piece::generatePositions(int rows, int columns) {
+void Piece::generatePositions(unsigned int rows, unsigned int columns) {
     unsigned int row, col, maxRow, maxCol;
 
     for (auto pattern : (*this)) {

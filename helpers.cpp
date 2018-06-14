@@ -171,5 +171,3 @@ ColorValues htmlColorNameToValues(const string& colorName) {
 
     return htmlColorsTable[colorName];
 }
-
-ErrorColor::ErrorColor(const char* msg) noexcept: exception(msg) {}

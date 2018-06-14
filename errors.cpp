@@ -4,12 +4,11 @@
 
 using namespace std;
 
-Errors::Errors(const string& msg) {
-    _msg = "Fatal - talospuzzle command line error: ";
+static const string errorsPrefix = "Fatal - talospuzzle command line error: ";
+
+ErrorParams::ErrorParams(const std::string& msg) noexcept: _msg(errorsPrefix) {
     _msg.append(msg);
 }
-
-Errors::Errors(const char* msg) {
-    _msg = "Fatal - talospuzzle command line error: ";
+ErrorParams::ErrorParams(const char* msg) noexcept: _msg(errorsPrefix)  {
     _msg.append(msg);
 }
