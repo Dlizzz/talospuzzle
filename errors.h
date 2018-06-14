@@ -8,13 +8,13 @@ class Errors:
 public:
     Errors(const std::string& msg);
     Errors(const char* msg);
-    const char* what();
+    virtual const char* what() const;
 
 private:
     std::string _msg;
 };
 
-inline const char* Errors::what() { return _msg.c_str(); }
+inline const char* Errors::what() const { return _msg.c_str(); }
 
 class ErrorParams: 
     public Errors {

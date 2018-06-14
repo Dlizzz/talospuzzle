@@ -5,7 +5,7 @@
 
 #include "piece.h"
 
-typedef std::unordered_map<std::string, Piece> PiecesDef;
+using PiecesDef = std::unordered_map<std::string, Piece>;
 
 class PiecesBag: 
     public PiecesDef  {

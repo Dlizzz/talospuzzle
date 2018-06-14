@@ -168,9 +168,8 @@ ColorValues htmlColorNameToValues(const string& colorName) {
         msg = colorName + " is not a valid HTML color name";
         throw ErrorColor(msg.c_str());
     }
-    else {
-        return htmlColorsTable[colorName];
-    }
+
+    return htmlColorsTable[colorName];
 }
 
 ErrorColor::ErrorColor(const char* msg) noexcept: exception(msg) {}

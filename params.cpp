@@ -38,9 +38,9 @@ static const int LINE_LENGTH = 120;
 static const int DESCRIPTION_LENGTH = 80;
 
 Params::Params() noexcept:
+    po::options_description(CAPTION, LINE_LENGTH, DESCRIPTION_LENGTH),
     _lineLength(LINE_LENGTH),
-    _descriptionLength(DESCRIPTION_LENGTH), 
-    po::options_description(CAPTION, LINE_LENGTH, DESCRIPTION_LENGTH) {}
+    _descriptionLength(DESCRIPTION_LENGTH) {}
 
 bool Params::readParams(int ac, char* av[]) {
     try {
@@ -68,42 +68,56 @@ bool Params::readParams(int ac, char* av[]) {
             "images",
             po::bool_switch()->default_value(false),
             "Output solutions as png images (toggle)"
-            )(
-                "output-dir",
-                po::value<fs::path>()->default_value(fs::current_path())->notifier(
-                    [](fs::path value) { if (not fs::is_directory(value)) throw ErrorParams(
-                        string("--output-dir: ")
-                        .append(value.string())
-                        .append(" is not a directory")
-                ); }
+        )(
+            "output-dir",
+            po::value<fs::path>()->default_value(fs::current_path())->notifier(
+                [](fs::path value) { 
+                    if (not fs::is_directory(value)) {
+                        throw ErrorParams(
+                            string("--output-dir: ")
+                            .append(value.string())
+                            .append(" is not a directory")
+                        );
+                    }
+                }
             ),
 			"Directory where to output png images (default: application dir)"
 		)(
 			"cell-size",
 			po::value<int>()->default_value(100)->notifier(
-                [](int value) { if (value <= 0) throw ErrorParams(
-                    "--cell-size must be greater than 0"
-                ); }
+                [](int value) { 
+                    if (value <= 0) {
+                        throw ErrorParams("--cell-size must be greater than 0");
+                    }
+                }
             ),
 			"Size in pixels of one cell of the board (default: 100)"
-		)(
+        )(
 			"shape-color",
 			po::value<string>()->default_value("Yellow")->notifier(
-                [](string value) { if (not isValidHtmlColorName(value)) throw ErrorParams(
-                    string("--shape-color: ")
-                    .append(value)
-                    .append(" is not a valid HTML color name")
-                ); }
+                [](string value) {
+                    if (not isValidHtmlColorName(value)) {
+                        throw ErrorParams(
+                            string("--shape-color: ")
+                            .append(value)
+                            .append(" is not a valid HTML color name")
+                        );
+                    }
+                }
             ),
 			"Color name (HTML) of the shape color (default: Yellow)"
 		)(
 			"fill-color",
 			po::value<string>()->default_value("DarkMagenta")->notifier(
-                [](string value) { if (not isValidHtmlColorName(value)) throw ErrorParams(
-                    string("--fill-color: ")
-                    .append(value)
-                    .append(" is not a valid HTML color name")
-                ); }
+                [](string value) {
+                    if (not isValidHtmlColorName(value)) {
+                        throw ErrorParams(
+                            string("--fill-color: ")
+                            .append(value)
+                            .append(" is not a valid HTML color name")
+                        );
+                    }
+                }
             ),
 			"Color name (HTML) of the fill color (default: DarkMagenta)"
 		);
@@ -113,17 +127,21 @@ bool Params::readParams(int ac, char* av[]) {
 		boardOptions.add_options()(
 			"rows",
             po::value<int>()->required()->notifier(
-                [](int value) { if (value <= 0) throw ErrorParams(
-                    "--rows must be greater than 0"
-                ); }
+                [](int value) {
+                    if (value <= 0) {
+                        throw ErrorParams("--rows must be greater than 0");
+                    }
+                }
             ),
 			"Number of board rows (mandatory)"
 		)(
 			"columns",
             po::value<int>()->required()->notifier(
-                [](int value) { if (value <= 0) throw ErrorParams(
-                    "--columns must be greater than 0"
-                ); }
+                [](int value) {
+                    if (value <= 0) {
+                        throw ErrorParams("--columns must be greater than 0");
+                    }
+                }
             ),
 			"Number of board columns (mandatory)"
 		);
@@ -133,57 +151,71 @@ bool Params::readParams(int ac, char* av[]) {
 		piecesOptions.add_options()(
 			"square",
 			po::value<int>()->default_value(0)->notifier(
-                [](int value) { if (value < 0) throw ErrorParams(
-                    "--square must be greater than or equal to 0"
-                ); }
+                [](int value) {
+                    if (value < 0) {
+                        throw ErrorParams("--square must be greater than or equal to 0");
+                    }
+                }
             ),
 			"Number of Square shape pieces (default: 0)"
 		)(
 			"l-right",
 			po::value<int>()->default_value(0)->notifier(
-                [](int value) { if (value < 0) throw ErrorParams(
-                    "--l-right must be greater than or equal to 0"
-                ); }
+                [](int value) {
+                    if (value < 0) {
+                        throw ErrorParams("--l-right must be greater than or equal to 0");
+                    }
+                }
             ),
 			"Number of L right shape pieces (default: 0)"
 		)(
             "l-left",
 			po::value<int>()->default_value(0)->notifier(
-                [](int value) { if (value < 0) throw ErrorParams(
-                    "--l-left must be greater than or equal to 0"
-                ); }
+                [](int value) {
+                    if (value < 0) {
+                        throw ErrorParams("--l-left must be greater than or equal to 0");
+                    }
+                }
             ),
 			"Number of L left shape pieces (default: 0)"
 		)(
 			"bar",
 			po::value<int>()->default_value(0)->notifier(
-                [](int value) { if (value < 0) throw ErrorParams(
-                    "--bar must be greater than or equal to 0"
-                ); }
+                [](int value) {
+                    if (value < 0) {
+                        throw ErrorParams("--bar must be greater than or equal to 0");
+                    }
+                }
             ),
 			"Number of Bar shape pieces (default: 0)"
 		)(
 			"tee",
 			po::value<int>()->default_value(0)->notifier(
-                [](int value) { if (value < 0) throw ErrorParams(
-                    "--tee must be greater than or equal to 0"
-                ); }
+                [](int value) {
+                    if (value < 0) {
+                        throw ErrorParams("--tee must be greater than or equal to 0");
+                    }
+                }
             ),
 			"Number of T shape pieces (default: 0)"
 		)(
 			"step-right",
 			po::value<int>()->default_value(0)->notifier(
-                [](int value) { if (value < 0) throw ErrorParams(
-                    "--step-right must be greater than or equal to 0"
-                ); }
+                [](int value) {
+                    if (value < 0) {
+                        throw ErrorParams("--step-right must be greater than or equal to 0");
+                    }
+                }
             ),
 			"Number of Step right shape pieces (default: 0)"
 		)(
 			"step-left",
 			po::value<int>()->default_value(0)->notifier(
-                [](int value) { if (value < 0) throw ErrorParams(
-                    "--step-left must be greater than or equal to 0"
-                ); }
+                [](int value) {
+                    if (value < 0) {
+                        throw ErrorParams("--step-left must be greater than or equal to 0");
+                    }
+                }
             ),
 			"Number of Step left shape pieces (default: 0)"
 		);
@@ -194,7 +226,7 @@ bool Params::readParams(int ac, char* av[]) {
         add(globalOptions);
 
 		po::store(po::parse_command_line(ac, av, *this), *this);
-        if (count("help")) return false;
+        if (count("help")) { return false; }
 		po::notify(*this);
         return true;
 	}

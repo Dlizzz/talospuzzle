@@ -1,14 +1,14 @@
 #pragma once
 #include <vector>
 
-typedef std::vector<unsigned char> MatrixLineDef;
-typedef std::vector<MatrixLineDef> MatrixDef;
+using MatrixLineDef = std::vector<unsigned char>;
+using MatrixDef = std::vector<MatrixLineDef>;
 
 class Matrix:
     public MatrixDef {
 public:
     using MatrixDef::MatrixDef;
-    Matrix() noexcept;
+    Matrix() noexcept = default;
     Matrix(unsigned int ro, unsigned int col);
     bool add(const Matrix& matrix);
     void paste(const Matrix& matrix, unsigned int toRow, unsigned int toCol);

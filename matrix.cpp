@@ -6,8 +6,6 @@
 
 using namespace std;
 
-Matrix::Matrix() noexcept {}
-
 Matrix::Matrix(unsigned int ro, unsigned int col): 
     vector<MatrixLineDef>(ro, MatrixLineDef(col, 0)) {}
 
@@ -42,12 +40,12 @@ bool Matrix::add(const Matrix& matrix) {
     unsigned int row, col;
 
     // Don't do anything if matrixes don't have same size
-    if ((rows() != matrix.rows()) || (columns() != matrix.columns())) return false;
+    if ((rows() != matrix.rows()) || (columns() != matrix.columns())) { return false; }
    
     // First test if there is no element > 1 after addition, without changing the matrix
     for (row = 0; row < rows(); ++row) {
         for (col = 0; col < columns(); ++col) {
-            if (((*this)[row][col] + matrix[row][col]) > 1) return false;
+            if (((*this)[row][col] + matrix[row][col]) > 1) { return false; }
         }
     }
 
@@ -71,7 +69,7 @@ void Matrix::paste(const Matrix& matrix, unsigned int toRow, unsigned int toCol)
     unsigned int row, col, matrixRow, matrixCol, minRows, minColumns;
 
     // Can't paste outside of the current matrix
-    if ((toRow >= rows()) || (toCol >= columns())) return;
+    if ((toRow >= rows()) || (toCol >= columns())) { return; }
 
     minRows = rows() <= matrix.rows() + toRow ? rows() : matrix.rows() + toRow;
     minColumns = columns() <= matrix.columns() + toCol ? columns(): matrix.columns() + toCol;
@@ -86,15 +84,15 @@ void Matrix::paste(const Matrix& matrix, unsigned int toRow, unsigned int toCol)
 }
 
 ostream& operator<<(ostream& out, const Matrix& m) {
-    const char underline = char(238);
-    const char block = char(219);
-    const char empty = char(250);
+    const auto underline = char(238);
+    const auto block = char(219);
+    const auto empty = char(250);
     const char space = *" ";
     const char newline = *"\n";
 
     for (auto row: m) {
         out << space;
-        for (auto col: row) out << (col == 1 ? block : empty);
+        for (auto col : row) { out << (col == 1 ? block : empty); }
         out << newline;
     }
     return out;
