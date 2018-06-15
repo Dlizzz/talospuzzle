@@ -13,14 +13,13 @@ PiecesSet::PiecesSet(const PiecesBag& bag, const Params& params) {
 
     for (auto piece : bag) {
         pieceCount = params.getPieceCount(piece.first);
-        for (int i = 0; i < pieceCount; i++) push_back(piece.second);
+        for (int i = 0; i < pieceCount; i++) { push_back(piece.second); }
     }
 }
 
 
 // Sort the set of pieces from the lowest number of positions to the biggest
-// then put the biggest first. It allows to have the maximum of parallel threads and to optimize
-// tree crawling.
+// then put the biggest first. 
 void PiecesSet::optimize() {
     sort(begin(), end(), sortPiece);
     auto it = insert(begin(), back());
@@ -31,7 +30,7 @@ ostream& operator<<(ostream& out, const PiecesSet& set) {
     const char newline = *"\n";
     string header;
 
-    for (auto piece : set) {
+    for (auto& piece : set) {
         header = piece.getName() + " (" + piece.getLabel() + "):\t"
             + to_string(piece.getPositions()->size()) + " positions";
         out << header << newline;

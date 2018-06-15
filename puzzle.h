@@ -6,6 +6,11 @@
 #include "piecesset.h"
 #include "solution.h"
 
+struct TreeNode {
+    unsigned int pieceIdx;
+    unsigned int positionIdx;
+};
+
 class Puzzle:
     private Board,
     private PiecesSet {
@@ -14,9 +19,10 @@ public:
     void solve();
 
 private:
-    bool _verbose = false;
-    bool _first = false;
-    bool _stats = false;
-    std::vector<Solution> solutions;
+    const bool _verbose;
+    const bool _first;
+    const bool _stats;
+    const int _treeDepth;
+    void _crawlTree();
 };
 

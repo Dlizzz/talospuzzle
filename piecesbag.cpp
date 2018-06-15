@@ -4,7 +4,7 @@
 using namespace std;
 
 std::ostream& operator<<(std::ostream& out, const PiecesBag& bag) {
-    for (auto piece : bag) out << piece.second;
+    for (auto piece : bag) { out << piece.second; }
     return out;
 }
 

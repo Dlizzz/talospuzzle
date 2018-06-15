@@ -10,6 +10,8 @@ class PiecesSet:
 public:
     PiecesSet(const PiecesBag& bag, const Params& params);
     friend std::ostream& operator<<(std::ostream& out, const PiecesSet& set);
+
+protected:
     void optimize();
 };
 
