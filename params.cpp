@@ -10,9 +10,16 @@
 #include <string>
 #include <memory>
 
+#include <codeanalysis\warnings.h>
+#include <CppCoreCheck\Warnings.h>
+#pragma warning( push )
+#pragma warning ( disable : ALL_CODE_ANALYSIS_WARNINGS )
+#pragma warning ( disable: ALL_CPPCORECHECK_WARNINGS)
 #define BOOST_FILESYSTEM_NO_DEPRECATED
 #include <boost/filesystem.hpp>
 #include <boost/program_options.hpp>
+#pragma warning( pop )
+
 namespace po = boost::program_options;
 namespace fs = boost::filesystem;
 

@@ -43,5 +43,9 @@ int main(int ac, char* av[]) {
 
     // Solve the puzzle
     puzzle.solve();
+
+    // Print the solutions
+    puzzle.printSolutions();
 }
+
 

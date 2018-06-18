@@ -8,7 +8,7 @@
 using PiecesDef = std::unordered_map<std::string, Piece>;
 
 class PiecesBag: 
-    public PiecesDef  {
+    public PiecesDef {
 public:
     using PiecesDef::PiecesDef;
     friend std::ostream& operator<<(std::ostream& out, const PiecesBag& bag);

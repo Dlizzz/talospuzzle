@@ -2,6 +2,21 @@
 
 #include <exception>
 #include <string>
+#include <iostream>
+
+// Ascii drawing components
+enum DrawingComponents: char {
+    FULL = char(219), 
+    BOTTOM_LEFT_CORNER = char(200),
+    TOP_LEFT_CORNER = char(201),
+    BOTTOM_RIGHT_CORNER = char(188),
+    TOP_RIGHT_CORNER = char(187),
+    HORIZONTAL_BAR = char(205),
+    VERTICAL_BAR = char(186),
+    NOTHING = char(32),
+    EMPTY = char(250),
+    UNDERLINE = char(238)
+};
 
 // HTML Colors helpers
 class ErrorColor: 
@@ -26,3 +41,9 @@ struct ColorValues {
 bool isValidHtmlColorName(const std::string& colorName) noexcept;
 
 ColorValues htmlColorNameToValues(const std::string& colorName);
+
+// Ascii drawing helpers
+void coutTopBorder(unsigned int columns, unsigned int offset);
+void coutBottomBorder(unsigned int columns, unsigned int offset);
+void coutSideBorder(unsigned int offset);
+void coutColoredBlock(const ColorValues& color);

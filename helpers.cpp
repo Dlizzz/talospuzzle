@@ -1,5 +1,11 @@
 #include <unordered_map>
 #include <string>
+#if defined(_WIN32)
+// Workaround for "combaseapi.h(229): error C2187: 
+// syntax error: 'identifier' was unexpected here" when using /permissive-
+struct IUnknown; 
+#include <Windows.h>
+#endif
 
 #include "helpers.h"
 
@@ -170,4 +176,83 @@ ColorValues htmlColorNameToValues(const string& colorName) {
     }
 
     return htmlColorsTable[colorName];
+}
+
+// Ascii drawing helpers
+void coutTopBorder(unsigned int columns, unsigned int offset = 0) {
+    cout << string(offset, NOTHING);
+
+#if defined(_WIN32)
+    CONSOLE_SCREEN_BUFFER_INFO csbInfo;
+    HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    GetConsoleScreenBufferInfo(hConsoleOutput, &csbInfo);
+    WORD wAttributes = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED ;
+    SetConsoleTextAttribute(hConsoleOutput, wAttributes);
+#endif 
+
+    cout << string(long long(columns) + 2, FULL);
+
+#if defined(_WIN32)
+    SetConsoleTextAttribute(hConsoleOutput, csbInfo.wAttributes);
+#endif
+}
+
+void coutBottomBorder(unsigned int columns, unsigned int offset = 0) {
+    cout << string(offset, NOTHING);
+
+#if defined(_WIN32)
+    CONSOLE_SCREEN_BUFFER_INFO csbInfo;
+    HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    GetConsoleScreenBufferInfo(hConsoleOutput, &csbInfo);
+    WORD wAttributes = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED ;
+    SetConsoleTextAttribute(hConsoleOutput, wAttributes);
+#endif 
+
+    cout << string(long long(columns) + 2, FULL);
+
+#if defined(_WIN32)
+    SetConsoleTextAttribute(hConsoleOutput, csbInfo.wAttributes);
+#endif
+}
+
+void coutSideBorder(unsigned int offset) {
+    cout << string(offset, NOTHING);
+
+#if defined(_WIN32)
+    CONSOLE_SCREEN_BUFFER_INFO csbInfo;
+    HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    GetConsoleScreenBufferInfo(hConsoleOutput, &csbInfo);
+    WORD wAttributes = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED ;
+    SetConsoleTextAttribute(hConsoleOutput, wAttributes);
+#endif 
+
+    cout << string(1, FULL);
+
+#if defined(_WIN32)
+    SetConsoleTextAttribute(hConsoleOutput, csbInfo.wAttributes);
+#endif
+}
+
+void coutColoredBlock(const ColorValues& color) {
+#if defined(_WIN32)
+    CONSOLE_SCREEN_BUFFER_INFO csbInfo;
+    HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
+    GetConsoleScreenBufferInfo(hConsoleOutput, &csbInfo);
+
+    WORD wAttributes = 0;
+    if (color.redValue > 128) { wAttributes  = wAttributes  | FOREGROUND_RED; }
+    if (color.greenValue > 128) { wAttributes  = wAttributes  | FOREGROUND_GREEN; }
+    if (color.blueValue > 128) { wAttributes  = wAttributes  | FOREGROUND_BLUE; }
+    if ((color.redValue + color.greenValue + color.blueValue) > 384) {
+        wAttributes  = wAttributes  | FOREGROUND_INTENSITY;
+    }
+    
+    SetConsoleTextAttribute(hConsoleOutput, wAttributes);
+#endif
+
+    cout << string(1, FULL) << flush;
+
+#if defined(_WIN32)
+    SetConsoleTextAttribute(hConsoleOutput, csbInfo.wAttributes);
+#endif
 }

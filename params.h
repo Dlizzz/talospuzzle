@@ -3,7 +3,13 @@
 #include <string>
 #include <memory>
 
+#include <codeanalysis\warnings.h>
+#include <CppCoreCheck\Warnings.h>
+#pragma warning( push )
+#pragma warning ( disable : ALL_CODE_ANALYSIS_WARNINGS )
+#pragma warning ( disable: ALL_CPPCORECHECK_WARNINGS)
 #include <boost/program_options.hpp>
+#pragma warning( pop )
 
 class Params: 
     private boost::program_options::options_description, 
