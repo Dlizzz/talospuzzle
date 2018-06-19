@@ -18,7 +18,9 @@ Solution::Solution(PiecesSet::iterator& pieceIt, Positions::iterator& positionIt
     _board(make_unique<Matrix>(board)) {}
 
 Solution::Solution(const Solution& solution):
-    _board(make_unique<Matrix>(*solution._board)) {}
+    std::vector<std::pair<PiecesSet::iterator, Positions::iterator>>(solution),
+    _board(make_unique<Matrix>(*solution._board)),
+    _Id(solution._Id) {}
 
 // Solutions are equal if at least one of their symetrical boards are equal
 bool Solution::operator==(const Solution& solution) {
@@ -31,27 +33,25 @@ bool Solution::operator==(const Solution& solution) {
     return false;
 }
 
-void Solution::_makeSolutionBoard() {
+void Solution::_makeSolutionBoard(PiecesSet& piecesSet, int Id) {
     // Do nothing if board is not initialized
     if (!_board) { return; }
-    if (_board->empty()) { return; }
-    for (auto& row : *_board) {
-        if (row.empty()) { return; }
-    }
+    
+    _Id = Id;
 
     // Replace board by a zero initialized board
-    *_board = Matrix(_board->rows(), _board->columns);
-    
-
-    
-    for (auto& position : solution) {
-        unsigned char pieceId = distance(begin(), position.first) + 1;
-        puzzleBoard.combine(position.second->times(pieceId));
+    _board = make_unique<Matrix>(_board->rows(), _board->columns());
+        
+    // Combine all the positions in the board. Each element of the board stores the index of the
+    // corresponding piece to easily find the piece from the board
+    for (auto& position : *this) {
+        unsigned char pieceId = distance(piecesSet.begin(), position.first) + 1;
+        _board->combine(position.second->times(pieceId));
     }
 }
 
 // Helper for list deduplication
-bool equal(const Solution& solutionA, const Solution& solutionB) {
+bool areSolutionsEqual(const Solution& solutionA, const Solution& solutionB) {
 
     if (*solutionA._board == *solutionB._board) { return true; }
     if (*solutionA._board == solutionB._board->symHorizontal()) { return true; }

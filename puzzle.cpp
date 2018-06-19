@@ -19,6 +19,7 @@ Puzzle::Puzzle(const Params& params):
     _verbose(params.getVerbose()), 
     _first(params.getFirst()), 
     _stats(params.getStats()),
+    _solved(false),
     _solutions(make_unique<list<Solution>>()) {
         
     for (auto& piece : *this) { piece._generatePositions(boardRows, boardColumns); }
@@ -51,7 +52,10 @@ void Puzzle::solve() {
     }
 
     // Remove duplicated solution, including symetrical solutions (horizontal, vertical, central)
-    //_deduplicateSolutions();
+    _deduplicateSolutions();
+
+    // Puzzle is now solved
+    _solved = true;
 }
 
 void Puzzle::_crawlTree(Solution& solution, PiecesSet::iterator& nextPieceIt) {
@@ -102,21 +106,16 @@ void Puzzle::_crawlTree(Solution& solution, PiecesSet::iterator& nextPieceIt) {
 }
 
 void Puzzle::printSolutions() {
-    int solutionId = 0;
-    for (auto& solution: *_solutions) {
-        // Build puzzle board for the solution
-        Matrix puzzleBoard(boardRows, boardColumns);
-        for (auto& position : solution) {
-            unsigned char pieceId = distance(begin(), position.first) + 1;
-            puzzleBoard.combine(position.second->times(pieceId));
-        }
+    // Don't do anything if not solved
+    if (!_solved) { return; }
 
+    for (auto& solution : *_solutions) {
         // Draw the solution
-        string header = "Solution " + to_string(solutionId++); 
+        string header = "Solution " + to_string(solution._Id + 1); 
         cout << header << endl << string(header.size(), UNDERLINE) << endl;
-        coutTopBorder(boardColumns, 1);
+        coutTopBorder(solution._board->columns(), 1);
         cout << endl;
-        for (auto& row : puzzleBoard) {
+        for (auto& row : *solution._board) {
             coutSideBorder(1);
             for (auto& element : row) {
                 // Get the piece color, from element being the index of the piece  
@@ -126,19 +125,19 @@ void Puzzle::printSolutions() {
             coutSideBorder(0);
             cout << endl;
         }
-        coutBottomBorder(boardColumns, 1);
+        coutBottomBorder(solution._board->columns(), 1);
         cout << endl << endl;
     }
 }
 
 void Puzzle::_deduplicateSolutions() {
+    // Generate the board with pieces index for all solutions
+    int Id = 0;
     for (auto& solution : *_solutions) {
-
-        // Build puzzle board for the solution
-        Matrix puzzleBoard(boardRows, boardColumns);
-        for (auto& position : solution) {
-            unsigned char pieceId = distance(begin(), position.first) + 1;
-            puzzleBoard.combine(position.second->times(pieceId));
-        }
+        solution._makeSolutionBoard(*this, Id);
+        ++Id;
     }
+    
+    // Deduplicate the list of solutions
+    _solutions->unique(areSolutionsEqual);
 }

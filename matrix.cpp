@@ -60,11 +60,9 @@ Matrix Matrix::times(const unsigned char factor) {
     Matrix out(*this);
 
     for (auto& row : out) {
-        for_each(
-            row.begin(),
-            row.end(), 
-            [factor](unsigned char element) { element *= factor; }
-        );
+        for (auto& element : row) {
+            element *= factor;
+        }
     }
 
     return out;
