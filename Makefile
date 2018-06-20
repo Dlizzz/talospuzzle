@@ -3,7 +3,7 @@ BINDIR = bin
 SRCEXT = cpp
 
 CC = g++
-CFLAGS = -c -g -Wall -Wno-unknown-pragmas -std=c++17
+CFLAGS = -c -g -Wall -Wno-unknown-pragmas -std=c++17 -D_DEBUG
 LFLAGS =
 
 TARGET := $(BINDIR)/talospuzzle

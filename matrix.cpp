@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <sstream>
+#include <string>
 
 #include "matrix.h"
 #include "errors.h"
@@ -11,18 +13,20 @@ Matrix::Matrix(unsigned int ro, unsigned int col):
     MatrixDef(ro, MatrixLineDef(col, 0)) {}
 
 string Matrix::to_string() {
-    string out;
+    stringstream outstream;
     
     for (auto& row : *this) {
-        out += "|";
+        outstream << "|";
         for (auto& element : row) {
-            out += std::to_string(element);
-            out += ",";
+            outstream.width(2);
+            outstream << int(element);
+            outstream.width(0);
+            outstream << ",";
         }
-        out += "\b|\n";
+        outstream << "\b|\n";
     }
 
-    return out;
+    return outstream.str();
 }
 
 Matrix Matrix::rot90() const {
@@ -160,7 +164,9 @@ bool Matrix::operator==(const Matrix& matrix) {
 
     // Exit as soon as two rows (vectors) are not equals
     for (unsigned int row = 0; row < rows(); ++row) {
-        if ((*this)[row] != matrix[row]) { return false; }
+        for (unsigned int col = 0; col < columns(); ++col) {
+            if ((*this)[row][col] != matrix[row][col]) { return false; }
+        }
     }
  
     return true;

@@ -3,7 +3,9 @@
 #include <list>
 #include <iterator>
 #include <memory>
+#include <string>
 
+#include "errors.h"
 #include "params.h"
 #include "board.h"
 #include "piece.h"
@@ -22,6 +24,24 @@ Puzzle::Puzzle(const Params& params):
     _solved(false),
     _solutions(make_unique<list<Solution>>()) {
         
+    // Verify that there is enough piece tocover the board
+    unsigned long piecesSurface = size() * 4;
+    unsigned long boardSurface = boardRows * boardColumns;
+    if (piecesSurface > boardSurface) {
+        string message = "Too many pieces for the board. Have "
+            + to_string(size())
+            + ", needs "
+            + to_string(boardSurface / 4);
+        throw ErrorParams(message);
+    }
+    else if (piecesSurface < boardSurface) {
+        string message = "Not enough pieces for the board. Have "
+            + to_string(size())
+            + ", needs "
+            + to_string(boardSurface / 4);
+        throw ErrorParams(message);
+    }
+
     for (auto& piece : *this) { piece._generatePositions(boardRows, boardColumns); }
 }
 

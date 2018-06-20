@@ -88,7 +88,7 @@ bool Params::readParams(int ac, char* av[]) {
                     }
                 }
             ),
-			"Directory where to output png images (default: application dir)"
+			"Directory where to output png images."
 		)(
 			"cell-size",
 			po::value<int>()->default_value(100)->notifier(
@@ -98,7 +98,7 @@ bool Params::readParams(int ac, char* av[]) {
                     }
                 }
             ),
-			"Size in pixels of one cell of the board (default: 100)"
+			"Size in pixels of one cell of the board."
         )(
 			"shape-color",
 			po::value<string>()->default_value("Yellow")->notifier(
@@ -112,7 +112,7 @@ bool Params::readParams(int ac, char* av[]) {
                     }
                 }
             ),
-			"Color name (HTML) of the shape color (default: Yellow)"
+			"Color name (HTML) of the shape color."
 		)(
 			"fill-color",
 			po::value<string>()->default_value("DarkMagenta")->notifier(
@@ -126,7 +126,7 @@ bool Params::readParams(int ac, char* av[]) {
                     }
                 }
             ),
-			"Color name (HTML) of the fill color (default: DarkMagenta)"
+			"Color name (HTML) of the fill color."
 		);
 
 		// Board options group
@@ -140,7 +140,7 @@ bool Params::readParams(int ac, char* av[]) {
                     }
                 }
             ),
-			"Number of board rows (mandatory)"
+			"Number of board rows."
 		)(
 			"columns",
             po::value<int>()->required()->notifier(
@@ -150,7 +150,7 @@ bool Params::readParams(int ac, char* av[]) {
                     }
                 }
             ),
-			"Number of board columns (mandatory)"
+			"Number of board columns."
 		);
 
 		// Pieces set options group
@@ -164,7 +164,7 @@ bool Params::readParams(int ac, char* av[]) {
                     }
                 }
             ),
-			"Number of Square shape pieces (default: 0)"
+			"Number of Square shape pieces."
 		)(
 			"l-right",
 			po::value<int>()->default_value(0)->notifier(
@@ -174,7 +174,7 @@ bool Params::readParams(int ac, char* av[]) {
                     }
                 }
             ),
-			"Number of L right shape pieces (default: 0)"
+			"Number of L right shape pieces."
 		)(
             "l-left",
 			po::value<int>()->default_value(0)->notifier(
@@ -184,7 +184,7 @@ bool Params::readParams(int ac, char* av[]) {
                     }
                 }
             ),
-			"Number of L left shape pieces (default: 0)"
+			"Number of L left shape pieces."
 		)(
 			"bar",
 			po::value<int>()->default_value(0)->notifier(
@@ -194,7 +194,7 @@ bool Params::readParams(int ac, char* av[]) {
                     }
                 }
             ),
-			"Number of Bar shape pieces (default: 0)"
+			"Number of Bar shape pieces."
 		)(
 			"tee",
 			po::value<int>()->default_value(0)->notifier(
@@ -204,7 +204,7 @@ bool Params::readParams(int ac, char* av[]) {
                     }
                 }
             ),
-			"Number of T shape pieces (default: 0)"
+			"Number of T shape pieces."
 		)(
 			"step-right",
 			po::value<int>()->default_value(0)->notifier(
@@ -214,7 +214,7 @@ bool Params::readParams(int ac, char* av[]) {
                     }
                 }
             ),
-			"Number of Step right shape pieces (default: 0)"
+			"Number of Step right shape pieces."
 		)(
 			"step-left",
 			po::value<int>()->default_value(0)->notifier(
@@ -224,7 +224,7 @@ bool Params::readParams(int ac, char* av[]) {
                     }
                 }
             ),
-			"Number of Step left shape pieces (default: 0)"
+			"Number of Step left shape pieces."
 		);
 
         add(boardOptions);
