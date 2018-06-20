@@ -15,9 +15,9 @@ public:
     bool addMaxOne(const Matrix& matrix);
     void paste(const Matrix& matrix, unsigned int toRow, unsigned int toCol);
     void combine(const Matrix& matrix, const char mask = 0);
-    bool operator==(const Matrix& matrix);
+    bool operator==(Matrix& matrix);
     friend std::ostream& operator<<(std::ostream& out, const Matrix& m);
-    std::string to_string();
+    std::string to_string(int offset);
     Matrix rot90() const;
     Matrix symHorizontal() const;
     Matrix symVertical() const;

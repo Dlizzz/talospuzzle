@@ -12,10 +12,11 @@ using namespace std;
 Matrix::Matrix(unsigned int ro, unsigned int col): 
     MatrixDef(ro, MatrixLineDef(col, 0)) {}
 
-string Matrix::to_string() {
+string Matrix::to_string(int offset) {
     stringstream outstream;
     
     for (auto& row : *this) {
+        outstream << string(offset, ' ');
         outstream << "|";
         for (auto& element : row) {
             outstream.width(2);
@@ -158,9 +159,13 @@ void Matrix::combine(const Matrix& matrix, const char mask) {
 
 }
 
-bool Matrix::operator==(const Matrix& matrix) {
+bool Matrix::operator==(Matrix& matrix) {
     // Not  if matrixes don't have same size
     if ((rows() != matrix.rows()) || (columns() != matrix.columns())) { return false; }
+
+    cout << this->to_string(0) << endl;
+    cout << matrix.to_string(4) << endl;
+    cout << "----\n";
 
     // Exit as soon as two rows (vectors) are not equals
     for (unsigned int row = 0; row < rows(); ++row) {
