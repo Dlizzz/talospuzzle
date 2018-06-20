@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 
 using MatrixLineDef = std::vector<unsigned char>;
 using MatrixDef = std::vector<MatrixLineDef>;
@@ -13,6 +14,9 @@ public:
     bool addMaxOne(const Matrix& matrix);
     void paste(const Matrix& matrix, unsigned int toRow, unsigned int toCol);
     void combine(const Matrix& matrix, const char mask = 0);
+    bool operator==(const Matrix& matrix);
+    friend std::ostream& operator<<(std::ostream& out, const Matrix& m);
+    std::string to_string();
     Matrix rot90() const;
     Matrix symHorizontal() const;
     Matrix symVertical() const;
@@ -20,8 +24,6 @@ public:
     Matrix times(const unsigned char factor);
     unsigned int rows() const;
     unsigned int columns() const;
-    bool operator==(const Matrix& matrix);
-    friend std::ostream& operator<<(std::ostream& out, const Matrix& m);
 };
 
 // Helper function for 
