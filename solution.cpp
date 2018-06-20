@@ -55,6 +55,13 @@ void Solution::_makeSolutionBoard(PiecesSet& piecesSet, int Id) {
 // Helper for list deduplication
 bool areSolutionsEqual(const Solution& solutionA, const Solution& solutionB) {
 
+    cout << solutionA._board->to_string() << endl;
+    cout << solutionB._board->to_string() << endl;
+    cout << solutionB._board->symHorizontal().to_string() << endl;
+    cout << solutionB._board->symVertical().to_string() << endl;
+    cout << solutionB._board->symCentral().to_string() << endl;
+    cout << "----\n";
+
     if (*solutionA._board == *solutionB._board) { return true; }
     if (*solutionA._board == solutionB._board->symHorizontal()) { return true; }
     if (*solutionA._board == solutionB._board->symVertical()) { return true; }

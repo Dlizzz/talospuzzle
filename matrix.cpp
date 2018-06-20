@@ -10,6 +10,21 @@ using namespace std;
 Matrix::Matrix(unsigned int ro, unsigned int col): 
     MatrixDef(ro, MatrixLineDef(col, 0)) {}
 
+string Matrix::to_string() {
+    string out;
+    
+    for (auto& row : *this) {
+        out += "|";
+        for (auto& element : row) {
+            out += std::to_string(element);
+            out += ",";
+        }
+        out += "\b|\n";
+    }
+
+    return out;
+}
+
 Matrix Matrix::rot90() const {
     Matrix out;
     MatrixLineDef outLine;
@@ -33,7 +48,7 @@ Matrix Matrix::rot90() const {
 }
 
 Matrix Matrix::symHorizontal() const {
-    Matrix out(rows());
+    Matrix out;
 
     // Copy each row to reverse it
     for (auto row: *this) {
