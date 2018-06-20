@@ -13,7 +13,7 @@ class Puzzle:
     public Board,
     public PiecesSet {
 public:
-    Puzzle(const Params& params);
+    explicit Puzzle(const Params& params);
     void solve();
     void printSolutions();
 

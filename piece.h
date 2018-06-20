@@ -24,12 +24,12 @@ class Piece:
 public:
     std::string name;
     Piece(
-        const std::string& name,
+        const std::string& givenName,
         const std::string& color,
         int patternsCount,
         const Matrix& initialPattern
     );
-    const int getPositionsCount() const noexcept { return _positions->size(); }
+    int getPositionsCount() const noexcept { return _positions->size(); }
     const ColorValues getColor() const noexcept { return _color; }
     friend class Puzzle;
     friend std::ostream& operator<<(std::ostream& out, const Piece& piece);

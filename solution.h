@@ -12,7 +12,7 @@ public:
     Solution();
     Solution(PiecesSet::iterator& pieceIt, Positions::iterator& positionIt, Matrix& board);
     Solution(const Solution& solution);
-    const int getId() const noexcept { return _Id; }
+    int getId() const noexcept { return _Id; }
     bool operator==(const Solution& solution);
     friend bool areSolutionsEqual(const Solution& solutionA, const Solution& solutionB);
     friend class Puzzle;
@@ -22,3 +22,5 @@ private:
     int _Id;
     void _makeSolutionBoard(PiecesSet& piecesSet, int Id);
 };
+
+bool areSolutionsEqual(const Solution& solutionA, const Solution& solutionB);

@@ -10,8 +10,10 @@
 #include <string>
 #include <memory>
 
+#if defined(_WIN32)
 #include <codeanalysis\warnings.h>
 #include <CppCoreCheck\Warnings.h>
+#endif
 #pragma warning( push )
 #pragma warning ( disable : ALL_CODE_ANALYSIS_WARNINGS )
 #pragma warning ( disable: ALL_CPPCORECHECK_WARNINGS)

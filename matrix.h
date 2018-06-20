@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <iostream>
 
 using MatrixLineDef = std::vector<unsigned char>;
 using MatrixDef = std::vector<MatrixLineDef>;

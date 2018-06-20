@@ -3,8 +3,10 @@
 #include <string>
 #include <memory>
 
+#if defined(_WIN32)
 #include <codeanalysis\warnings.h>
 #include <CppCoreCheck\Warnings.h>
+#endif
 #pragma warning( push )
 #pragma warning ( disable : ALL_CODE_ANALYSIS_WARNINGS )
 #pragma warning ( disable: ALL_CPPCORECHECK_WARNINGS)
@@ -30,8 +32,8 @@ private:
     unsigned int _descriptionLength;
 };
 
-inline int Params::getRows() const { return (*this)["rows"].as<int>(); };
-inline int Params::getColumns() const { return (*this)["columns"].as<int>(); };
-inline bool Params::getVerbose() const { return (*this)["verbose"].as<bool>(); };
-inline bool Params::getFirst() const { return (*this)["first"].as<bool>(); };
-inline bool Params::getStats() const { return (*this)["stats"].as<bool>(); };
+inline int Params::getRows() const { return (*this)["rows"].as<int>(); }
+inline int Params::getColumns() const { return (*this)["columns"].as<int>(); }
+inline bool Params::getVerbose() const { return (*this)["verbose"].as<bool>(); }
+inline bool Params::getFirst() const { return (*this)["first"].as<bool>(); }
+inline bool Params::getStats() const { return (*this)["stats"].as<bool>(); }

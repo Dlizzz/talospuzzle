@@ -190,7 +190,7 @@ void coutTopBorder(unsigned int columns, unsigned int offset = 0) {
     SetConsoleTextAttribute(hConsoleOutput, wAttributes);
 #endif 
 
-    cout << string(long long(columns) + 2, FULL);
+    cout << string(long(columns) + 2, FULL);
 
 #if defined(_WIN32)
     SetConsoleTextAttribute(hConsoleOutput, csbInfo.wAttributes);
@@ -208,7 +208,7 @@ void coutBottomBorder(unsigned int columns, unsigned int offset = 0) {
     SetConsoleTextAttribute(hConsoleOutput, wAttributes);
 #endif 
 
-    cout << string(long long(columns) + 2, FULL);
+    cout << string(long(columns) + 2, FULL);
 
 #if defined(_WIN32)
     SetConsoleTextAttribute(hConsoleOutput, csbInfo.wAttributes);

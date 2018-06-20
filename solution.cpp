@@ -9,13 +9,15 @@
 using namespace std;
 
 Solution::Solution():
-    _board(make_unique<Matrix>()) {}
+    _board(make_unique<Matrix>()),
+    _Id(0) {}
 
 Solution::Solution(PiecesSet::iterator& pieceIt, Positions::iterator& positionIt, Matrix& board):
     std::vector<std::pair<PiecesSet::iterator, Positions::iterator>>(
         1, make_pair(pieceIt, positionIt)
     ),
-    _board(make_unique<Matrix>(board)) {}
+    _board(make_unique<Matrix>(board)),
+    _Id(0) {}
 
 Solution::Solution(const Solution& solution):
     std::vector<std::pair<PiecesSet::iterator, Positions::iterator>>(solution),

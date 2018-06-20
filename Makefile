@@ -3,12 +3,12 @@ BINDIR = bin
 SRCEXT = cpp
 
 CC = g++
-CFLAGS = -c -g -Wall -std=c++17
+CFLAGS = -c -g -Wall -Wno-unknown-pragmas -std=c++17
 LFLAGS =
 
 TARGET := $(BINDIR)/talospuzzle
 INC =
-LIB = -l boost_program_options -l boost_filesystem
+LIB = -lboost_program_options -lboost_system -lboost_filesystem
 SOURCES := $(shell ls *.$(SRCEXT))
 OBJECTS := $(addprefix $(BUILDDIR)/,$(SOURCES:.$(SRCEXT)=.o))
 MKDIR_CMD := mkdir -p $(BUILDDIR)

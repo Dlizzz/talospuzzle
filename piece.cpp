@@ -11,13 +11,13 @@ using namespace std;
 //Initialize the piece with all its patterns, by rotating the initial pattern 'patternsCount' number
 //of time
 Piece::Piece(
-    const string& name,
+    const string& givenName,
     const string& color,
     int patternsCount,
     const Matrix& initialPattern
 ): 
     vector<Matrix>(1, initialPattern),
-    name(name),
+    name(givenName),
     _color(htmlColorNameToValues(color)), 
     _positions(make_shared<Positions>()) {
     
@@ -29,14 +29,12 @@ Piece::Piece(
 }
 
 void Piece::_generatePositions(unsigned int rows, unsigned int columns) {
-    unsigned int row, col, maxRow, maxCol;
-
     for (auto& pattern : (*this)) {
         if ((pattern.rows() > rows) || (pattern.columns() > columns)) { break; }
-        maxRow = rows - pattern.rows();
-        maxCol = columns - pattern.columns();
-        for (row = 0; row <= maxRow; ++row) {
-            for (col = 0; col <= maxCol; ++col) {
+        unsigned int maxRow = rows - pattern.rows();
+        unsigned int maxCol = columns - pattern.columns();
+        for (unsigned int row = 0; row <= maxRow; ++row) {
+            for (unsigned int col = 0; col <= maxCol; ++col) {
                 Matrix position(rows, columns);
                 position.paste(pattern, row, col);
                 _positions->push_back(position);
