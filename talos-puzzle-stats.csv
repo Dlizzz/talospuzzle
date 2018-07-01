@@ -1,0 +1,4 @@
+Hostname;Date;Id;Rows;Columns;l-right;l-left;step-right;step-left;square;bar;tee;Combinations;Solutions;Elapsed Time
+catspc;01/07/2018 20:11;P040202000000000000;4;2;2;0;0;0;0;0;0;16;1;0.001000
+catspc;01/07/2018 20:43:51;P040202000000000000;4;2;2;0;0;0;0;0;0;16;1;0,002
+catspc;01/07/2018 20:44:53;P040202000000000000;4;2;2;0;0;0;0;0;0;16;1;0,001

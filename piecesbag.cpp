@@ -11,32 +11,32 @@ std::ostream& operator<<(std::ostream& out, const PiecesBag& bag) {
 }
 
 PiecesBag piecesBag {
-    {"l-right", { "L Right", "DarkOrange", 4, {
+    {"l-right", { "L Right", 1, "DarkOrange", {
         {1, 1},
         {1, 0},
         {1, 0}
     }}},
-    {"l-left", { "L Left", "Tomato", 4, {
+    {"l-left", { "L Left", 2, "Tomato", {
         {1, 1},
         {0, 1}, 
         {0, 1}
     }}},
-    {"step-right", { "Step Right", "Lime", 2, {
+    {"step-right", { "Step Right", 3, "Lime", {
         {0, 1, 1},
         {1, 1, 0}
     }}},
-    {"step-left", { "Step Left", "SpringGreen", 2, {
+    {"step-left", { "Step Left", 4, "SpringGreen", {
         {1, 1, 0},
         {0, 1, 1}
     }}},
-    {"square", { "Square", "Crimson", 1, { 
+    {"square", { "Square", 5, "Crimson", { 
         {1, 1}, 
         {1, 1} 
     }}}, 
-    {"bar", { "Bar", "DarkViolet", 2, {
+    {"bar", { "Bar", 6, "DarkViolet", {
         {1, 1, 1, 1}
     }}},
-    {"tee", { "Tee", "Cyan", 4, {
+    {"tee", { "Tee", 7, "Cyan", {
         {0, 1, 0},
         {1, 1, 1}
     }}}

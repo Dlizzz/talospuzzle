@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include <vector>
+#include <list>
 #include <memory>
 
 #include "matrix.h"
@@ -20,25 +20,34 @@ enum asciiBackgroundColor {
 using Positions = std::vector<Matrix>;
 
 class Piece: 
-    public std::vector<Matrix> {
+    public std::list<Matrix> {
 public:
+    // Members
     std::string name;
+    // Standard methods
     Piece(
         const std::string& givenName,
+        const int Id,
         const std::string& color,
-        int patternsCount,
         const Matrix& initialPattern
     );
-    int getPositionsCount() const noexcept { return _positions->size(); }
+    Piece(const Piece& piece);
+    // Methods
+    long getPositionsCount() const noexcept { return _positions->size(); }
+    int getId()  const noexcept { return _Id; }
     const ColorValues getColor() const noexcept { return _color; }
+    // Friends
     friend class Puzzle;
     friend std::ostream& operator<<(std::ostream& out, const Piece& piece);
     friend bool comparePiece(const Piece& a, const Piece& b) noexcept;
     
 private:
+    // Members
+    int _Id;
     ColorValues _color;
-    std::shared_ptr<Positions> _positions;
-    void _generatePositions(unsigned int rows, unsigned int columns);
+    std::unique_ptr<Positions> _positions;
+    // Methods
+    long _generatePositions(unsigned int rows, unsigned int columns);
 };
 
 // Sorting helper. Piece 'a' < Piece 'b', if Piece 'a' has less positions

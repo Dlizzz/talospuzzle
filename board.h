@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 class Board {
 public:
@@ -7,4 +8,5 @@ public:
 protected:
     unsigned int boardRows;
     unsigned int boardColumns;
+    std::string boardId;
 };

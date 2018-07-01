@@ -12,25 +12,49 @@ using namespace std;
 //of time
 Piece::Piece(
     const string& givenName,
+    const int Id,
     const string& color,
-    int patternsCount,
     const Matrix& initialPattern
 ): 
-    vector<Matrix>(1, initialPattern),
+    list<Matrix>(1, initialPattern),
     name(givenName),
+    _Id(Id),
     _color(htmlColorNameToValues(color)), 
-    _positions(make_shared<Positions>()) {
+    _positions(make_unique<Positions>()) {
     
     // Add all patterns for the piece, by rotating the initial pattern
-    // push_back(initialPattern);
-    for (int i = 1; i < patternsCount; i++) {
-        push_back(back().rot90());
+    for (int i = 1; i < 4; ++i) { push_back(back().rot90()); }
+    // Deduplicate the list of patterns
+    for (list<Matrix>::iterator patternIt = begin();
+        patternIt != end();
+        ++patternIt
+    ) {
+        list<Matrix>::iterator testedPatternIt = next(patternIt);
+        while(testedPatternIt != end()) {
+            if (*patternIt == *testedPatternIt) {
+                testedPatternIt = erase(testedPatternIt);
+                // Tested solution iterator now points to the solution after the deleted one
+            }
+            else {
+                // Move to next solution
+                ++testedPatternIt;
+
+            }
+        }
     }
 }
 
-void Piece::_generatePositions(unsigned int rows, unsigned int columns) {
+Piece::Piece(const Piece& piece):
+    std::list<Matrix>(piece),
+    name(piece.name),
+    _Id(piece._Id),
+    _color(piece._color),
+    _positions(make_unique<Positions>(*piece._positions)) {}
+
+long Piece::_generatePositions(unsigned int rows, unsigned int columns) {
     for (auto& pattern : (*this)) {
-        if ((pattern.rows() > rows) || (pattern.columns() > columns)) { break; }
+        // Skip to next pattern if dimensions don't match
+        if ((pattern.rows() > rows) || (pattern.columns() > columns)) { continue; }
         unsigned int maxRow = rows - pattern.rows();
         unsigned int maxCol = columns - pattern.columns();
         for (unsigned int row = 0; row <= maxRow; ++row) {
@@ -41,6 +65,8 @@ void Piece::_generatePositions(unsigned int rows, unsigned int columns) {
             }
         }
     }
+
+    return _positions->size();
 }
 
 //Operator << overload for Piece class

@@ -1,6 +1,8 @@
 #include <algorithm>
 #include <iostream>
-#include <string>
+#include <iomanip>
+#include <sstream>
+#include <vector>
 
 #include "piecesset.h"
 #include "piece.h"
@@ -8,13 +10,23 @@
 
 using namespace std;
 
-PiecesSet::PiecesSet(const PiecesBag& bag, const Params& params) {
+PiecesSet::PiecesSet(const PiecesBag& bag, const Params& params):
+    piecesHeaders(), 
+    piecesCount(),
+    setId() {
+
+    stringstream id;
     for (auto& piece : bag) {
         int pieceCount = params.getPieceCount(piece.first);
+        piecesHeaders += (piece.first + ";");
+        piecesCount += (to_string(pieceCount) + ";");
+        id << setw(2) << setfill('0') << pieceCount;
         for (int i = 0; i < pieceCount; i++) { push_back(piece.second); }
     }
+    piecesHeaders.pop_back();
+    piecesCount.pop_back();
+    setId = id.str();
 }
-
 
 // Sort the set of pieces from the lowest number of positions to the biggest,
 // then put the biggest first. 

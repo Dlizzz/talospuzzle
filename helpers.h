@@ -6,7 +6,7 @@
 
 // Ascii drawing components
 enum DrawingComponents: char {
-    FULL = char(219), 
+    BLOCK = char(219), 
     BOTTOM_LEFT_CORNER = char(200),
     TOP_LEFT_CORNER = char(201),
     BOTTOM_RIGHT_CORNER = char(188),
@@ -42,8 +42,5 @@ bool isValidHtmlColorName(const std::string& colorName) noexcept;
 
 ColorValues htmlColorNameToValues(const std::string& colorName);
 
-// Ascii drawing helpers
-void coutTopBorder(unsigned int columns, unsigned int offset);
-void coutBottomBorder(unsigned int columns, unsigned int offset);
-void coutSideBorder(unsigned int offset);
+// Ascii drawing helper
 void coutColoredBlock(const ColorValues& color);

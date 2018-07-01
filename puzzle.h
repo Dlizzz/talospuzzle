@@ -1,7 +1,7 @@
 #pragma once
-#include <vector>
 #include <list>
 #include <memory>
+#include <ctime>
 
 #include "matrix.h"
 #include "params.h"
@@ -21,9 +21,12 @@ private:
     const bool _verbose;
     const bool _first;
     const bool _stats;
-    bool _solved;
+    long long _combinationsCount;
+    std::string _puzzleId;
+    clock_t _solvingTime;
     std::unique_ptr<std::list<Solution>> _solutions;
     void _crawlTree(Solution& solution, PiecesSet::iterator& nextPieceIt); 
     void _deduplicateSolutions();
+    void _printStats() const;
 };
 

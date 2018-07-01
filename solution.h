@@ -12,15 +12,13 @@ public:
     Solution();
     Solution(PiecesSet::iterator& pieceIt, Positions::iterator& positionIt, Matrix& board);
     Solution(const Solution& solution);
-    int getId() const noexcept { return _Id; }
-    bool operator==(const Solution& solution);
-    friend bool areSolutionsEqual(const Solution& solutionA, const Solution& solutionB);
+    bool operator==(const Solution& solution) const ;
+    void print(int offset) const;
     friend class Puzzle;
 
 private:
     std::unique_ptr<Matrix> _board;
-    int _Id;
-    void _makeSolutionBoard(PiecesSet& piecesSet, int Id);
+    bool _printable;
+    void _makeSolutionBoard();
+    void _makeSolutionBoard(PiecesSet& piecesSet);
 };
-
-bool areSolutionsEqual(const Solution& solutionA, const Solution& solutionB);

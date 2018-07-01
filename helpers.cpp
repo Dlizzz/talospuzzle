@@ -4,6 +4,8 @@
 // Workaround for "combaseapi.h(229): error C2187: 
 // syntax error: 'identifier' was unexpected here" when using /permissive-
 struct IUnknown; 
+#include <Winsock2.h>
+#pragma comment(lib, "ws2_32.lib")
 #include <Windows.h>
 #endif
 
@@ -178,61 +180,7 @@ ColorValues htmlColorNameToValues(const string& colorName) {
     return htmlColorsTable[colorName];
 }
 
-// Ascii drawing helpers
-void coutTopBorder(unsigned int columns, unsigned int offset = 0) {
-    cout << string(offset, NOTHING);
-
-#if defined(_WIN32)
-    CONSOLE_SCREEN_BUFFER_INFO csbInfo;
-    HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-    GetConsoleScreenBufferInfo(hConsoleOutput, &csbInfo);
-    WORD wAttributes = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED ;
-    SetConsoleTextAttribute(hConsoleOutput, wAttributes);
-#endif 
-
-    cout << string(long(columns) + 2, FULL);
-
-#if defined(_WIN32)
-    SetConsoleTextAttribute(hConsoleOutput, csbInfo.wAttributes);
-#endif
-}
-
-void coutBottomBorder(unsigned int columns, unsigned int offset = 0) {
-    cout << string(offset, NOTHING);
-
-#if defined(_WIN32)
-    CONSOLE_SCREEN_BUFFER_INFO csbInfo;
-    HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-    GetConsoleScreenBufferInfo(hConsoleOutput, &csbInfo);
-    WORD wAttributes = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED ;
-    SetConsoleTextAttribute(hConsoleOutput, wAttributes);
-#endif 
-
-    cout << string(long(columns) + 2, FULL);
-
-#if defined(_WIN32)
-    SetConsoleTextAttribute(hConsoleOutput, csbInfo.wAttributes);
-#endif
-}
-
-void coutSideBorder(unsigned int offset) {
-    cout << string(offset, NOTHING);
-
-#if defined(_WIN32)
-    CONSOLE_SCREEN_BUFFER_INFO csbInfo;
-    HANDLE hConsoleOutput = GetStdHandle(STD_OUTPUT_HANDLE);
-    GetConsoleScreenBufferInfo(hConsoleOutput, &csbInfo);
-    WORD wAttributes = FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_RED ;
-    SetConsoleTextAttribute(hConsoleOutput, wAttributes);
-#endif 
-
-    cout << string(1, FULL);
-
-#if defined(_WIN32)
-    SetConsoleTextAttribute(hConsoleOutput, csbInfo.wAttributes);
-#endif
-}
-
+// Ascii drawing helper
 void coutColoredBlock(const ColorValues& color) {
 #if defined(_WIN32)
     CONSOLE_SCREEN_BUFFER_INFO csbInfo;
@@ -248,11 +196,13 @@ void coutColoredBlock(const ColorValues& color) {
     }
     
     SetConsoleTextAttribute(hConsoleOutput, wAttributes);
+#else
 #endif
 
-    cout << string(1, FULL) << flush;
+    cout << string(1, BLOCK) << flush;
 
 #if defined(_WIN32)
     SetConsoleTextAttribute(hConsoleOutput, csbInfo.wAttributes);
+#else
 #endif
 }

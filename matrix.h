@@ -15,9 +15,9 @@ public:
     bool addMaxOne(const Matrix& matrix);
     void paste(const Matrix& matrix, unsigned int toRow, unsigned int toCol);
     void combine(const Matrix& matrix, const char mask = 0);
-    bool operator==(Matrix& matrix);
+    bool operator==(const Matrix& matrix) const ;
     friend std::ostream& operator<<(std::ostream& out, const Matrix& m);
-    std::string to_string(int offset);
+    std::string to_string(int offset) const;
     Matrix rot90() const;
     Matrix symHorizontal() const;
     Matrix symVertical() const;
@@ -26,9 +26,6 @@ public:
     unsigned int rows() const;
     unsigned int columns() const;
 };
-
-// Helper function for 
-bool equivalent(const Matrix& matrixA, const Matrix& matrixB);
 
 inline unsigned int Matrix::rows() const { return size(); }
 inline unsigned int Matrix::columns() const { return front().size(); }
